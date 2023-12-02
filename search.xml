@@ -6,6 +6,12 @@
     <content><![CDATA[<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        Systems.out.println(<span class="string">&quot;demo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
+      <tags>
+        <tag>demo</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -24,5 +30,22 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+      <categories>
+        <category>demo</category>
+      </categories>
+      <tags>
+        <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>demo1</title>
+    <url>/2023/12/02/demo1/</url>
+    <content><![CDATA[<h1 id="demo1"><a href="#demo1" class="headerlink" title="demo1"></a>demo1</h1>]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
+      <tags>
+        <tag>demo</tag>
+      </tags>
   </entry>
 </search>

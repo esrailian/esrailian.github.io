@@ -1,162 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>二叉树12.3</title>
-    <url>/2023/12/03/%E4%BA%8C%E5%8F%89%E6%A0%9112-3/</url>
-    <content><![CDATA[<h1 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236.二叉树的最近公共祖先"></a>236.二叉树的最近公共祖先</h1><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<span id="more"></span>
-
-<p>例如，给定如下二叉树: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4]</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201016173414722.png" alt="236. 二叉树的最近公共祖先"></p>
-<ul>
-<li>找最近的公共祖先，首先想到能自底向上查就好了，那二叉树该怎么自底向上查询呢？<ul>
-<li>当然是后序遍历了，后序遍历就是一个天然的回溯过程</li>
-</ul>
-</li>
-<li>这道题目要遍历整棵树，因为 p 和 q 的位置是随机的，可能分别分布在根节点的两棵左右子树上</li>
-<li>直接上代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span> || root == p || root == q) &#123; <span class="comment">// 递归结束条件</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 后序遍历</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> lowestCommonAncestor(root.left, p, q);</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> lowestCommonAncestor(root.right, p, q);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若未找到节点 p 或 q</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left != <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123; <span class="comment">// 若找到两个节点</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>通过画图来模拟程序的运行过程可以加深对此代码的理解</li>
-</ul>
-<hr>
-<h1 id="235-二叉搜索树的最近公共祖先"><a href="#235-二叉搜索树的最近公共祖先" class="headerlink" title="235.二叉搜索树的最近公共祖先"></a>235.二叉搜索树的最近公共祖先</h1><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<p>例如，给定如下二叉搜索树: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5]</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201018172243602.png" alt="235. 二叉搜索树的最近公共祖先"></p>
-<ul>
-<li>找的是在二叉搜索树中的最近公共祖先，要时刻记住，二叉搜索树的中序遍历是有序的，要充分利用这个特性</li>
-<li>要找p 和 q 的公共祖先，我们可以从上到下迭代遍历，<strong>当第一次遇到节点的值是在[p,q]之间后，这个节点一定就是最近的公共祖先了</strong>。这也正是最巧妙的地方</li>
-<li>可以模拟来论证，当 p &#x3D; 0， q &#x3D; 5时，从根节点开始遍历，遍历到结点2时，可以发现2在p和q之间，此时如果继续往下，向左遍历，那么结点2会错过成为5的祖先。</li>
-<li>直接上代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (root.val &gt; p.val &amp;&amp; root.val &gt; q.val) &#123;</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &lt; p.val &amp;&amp; root.val &lt; q.val) &#123;</span><br><span class="line">                root = root.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>迭代法的代码看上去可读性高些，递归法看上去更简便些</li>
-</ul>
-<hr>
-<h1 id="每日一题-1423-可获得的最大点数"><a href="#每日一题-1423-可获得的最大点数" class="headerlink" title="每日一题 1423.可获得的最大点数"></a>每日一题 1423.可获得的最大点数</h1><ul>
-<li><p>几张卡牌 <strong>排成一行</strong>，每张卡牌都有一个对应的点数。点数由整数数组 <code>cardPoints</code> 给出。每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 <code>k</code> 张卡牌。你的点数就是你拿到手中的所有卡牌的点数之和。给你一个整数数组 <code>cardPoints</code> 和整数 <code>k</code>，请你返回可以获得的最大点数。</p>
-</li>
-<li><p>解题思路</p>
-<ul>
-<li>每次都只能从两头取牌，看到题目首先想到每次取两头中最大的牌，最后的结果不就是最大的结果了吗？这种想法显然太稚嫩了</li>
-<li>因为你不知道左右两边中间的牌是否更大，简单来说就是这样（5，1，1000，2），你只能取两张牌（k&#x3D;2），如果每次都取两边最大的，那么最后的大牌1000，就取不到了。</li>
-<li>翻看题解，主要有两种思路，一种是前缀和，一种是滑动窗口。后者的思路比较能让笔者接收，属于是鄙人的舒适区了。</li>
-<li>先来看滑动窗口。题目不是要求最后的最大值吗，我直接整一个滑动窗口从头开始遍历，滑动窗口的长度为牌数减去最后取得的牌数（len &#x3D; length - k），遍历完成后得到最小的滑动窗口值（min），那么用整幅牌的总和sum减去这个min值，就可以求得最终手里牌的最大值。很巧妙，逆向思维加个滑动窗口。</li>
-<li>直接上代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> cardPoints.length, len = n - k;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>, cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            sum += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            cur += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> cur;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> len; i &lt; n; i++)&#123;</span><br><span class="line">            cur = cur + cardPoints[i] - cardPoints[i - len];</span><br><span class="line">            min = Math.min(min, cur);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum - min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>另一种解法：前缀和</p>
-</li>
-<li><p>前缀和的概念有些遗忘了，直接上代码</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> cardPoints.length;</span><br><span class="line">        <span class="type">int</span> []pre = <span class="keyword">new</span> <span class="title class_">int</span>[len+<span class="number">1</span>]; pre[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; len;i++)&#123;</span><br><span class="line">            pre[i+<span class="number">1</span>] = cardPoints[i] + pre[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt;= k;i++)&#123;</span><br><span class="line">            max = Math.max(max, pre[i] + pre[len] - pre[len-k+i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：imcover</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/solutions/220256/qian-zhui-he-xie-fa-by-imcover/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>动态规划12.7</title>
-    <url>/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇是动态规划三刷的开始，认真学习，认真输出！</p>
-<p>解决动态规划系列问题，最重要的就是动规五部曲，即</p>
-<ul>
-<li>确定dp数组以及下标的含义</li>
-<li>确定递推公式</li>
-<li>初始化dp数组</li>
-<li>确定遍历顺序</li>
-<li>举例推导dp数组</li>
-</ul>
-<span id="more"></span>
-
-<h1 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509. 斐波那契数"></a>509. 斐波那契数</h1><p>斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： <code>F(0) = 0，F(1) = 1 </code>，<code>F(n) = F(n - 1) + F(n - 2)</code>，其中<code> n &gt; 1</code> 给你n ，请计算 F(n) 。</p>
-<ul>
-<li><p>超级简单的一题，但是是一道练习运用动规五部曲的好题</p>
-</li>
-<li><p>首先第一步，确定<code>dp</code>数组以及下标的定义</p>
-<ul>
-<li>题目要求求出F(n),题目也告诉我们<code>F(n) = F(n - 1) + F(n - 2)</code>，显然，我们的<code>dp</code>数组可以表示为<code>dp[i]</code></li>
-</ul>
-</li>
-<li><p>顺其自然，确定递归公式：<code>dp[i] = dp[i-1]+dp[i-2]</code></p>
-</li>
-<li><p>第三步，初始化<code>dp</code>数组，题目又告诉我们，<code>F(0) = 0，F(1) = 1</code>,则我们应这样初始化，<code>dp[0]=0</code>,<code>dp[1]=1</code></p>
-</li>
-<li><p>第四步，确定遍历顺序，我们知道，<code>dp[i]</code> 是由它前两个数推出来的，那么我们的遍历顺序是不是应该从前往后呢？</p>
-</li>
-<li><p>第五步，举例推导<code>dp</code> 数组，很简单</p>
-</li>
-<li><p>直接上代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span> || n == <span class="number">1</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>有没有可以优化的地方呢？</p>
-<ul>
-<li><p>空间上是可以优化的，我们只需要两个数值就可以了，不需要创建一个数组</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> N)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(N &lt;= <span class="number">1</span>) <span class="keyword">return</span> N;</span><br><span class="line">            <span class="type">int</span> <span class="variable">dp0</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">dp1</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= N; i++)&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">tem</span> <span class="operator">=</span> dp0 + dp1;</span><br><span class="line">                dp0 = dp1;</span><br><span class="line">                dp1 = tem;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> dp[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>当然，这题还能用递归来解决</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> N)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(N &lt; <span class="number">2</span>) <span class="keyword">return</span> N;</span><br><span class="line">        <span class="keyword">return</span> fib(N-<span class="number">1</span>)+fib(N-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>总结，简单题是用来掌握方法论的，多多尝试动规五部曲吧</p>
-</li>
-</ul>
-<hr>
-<h1 id="每日一题-49-字母异位词分组"><a href="#每日一题-49-字母异位词分组" class="headerlink" title="每日一题-49.字母异位词分组"></a>每日一题-49.字母异位词分组</h1><p>给你一个字符串数组，请你将 <strong>字母异位词</strong> 组合在一起。可以按任意顺序返回结果列表。</p>
-<p><strong>字母异位词</strong> 是由重新排列源单词的所有字母得到的一个新单词。</p>
-<ul>
-<li><p>这道题是<code>Hot100</code>里哈希的题目，刚开始看到题目还没怎么看懂,后来看了看示例，才发现是那么一回事：要将题目给定的字符串数组里，由相同字母组成的字符串堆在一起，比如<code>&quot;rea&quot;,&quot;era&quot;,&quot;ear&quot;</code>这几个单词，这就是字母异位词，将他们放入同一个数组里再输出即可。</p>
-</li>
-<li><p>那么要将这几个单词堆在一起呢？</p>
-<ul>
-<li><p>这是一道哈希的题目，我们都应该想到，要用到<code>map</code>或者<code>set</code>, 笔者刚开始的思路是这样的，遍历每一个字符串，用一个26位的数组来统计字符串中每个字母的出现次数，然后将其用<code>map</code> 记录下来，这思路没错，但是笔者智商有限，不能将其用代码表达出来，况且还有很多细节没想到，所以直接奔题解去</p>
-</li>
-<li><p>官方题解是这样的，它提供了两种方法，本人认为方法一更能让人接受。思路如下：</p>
-<ul>
-<li><p>由于互为字母异位词的字符串他们所包含的字母是相同的，那么我们分别对他们进行字符串排序后，所得的排序后字符串不就是相同的吗，既然有相同的点了，我们是不是可以把这相同点当作map的键(key)。</p>
-</li>
-<li><p>然后再根据所得的键在map中寻找相应的值，map中的值应该是一个List元素，里面存储着互为字母异位词的各个单词，一旦我们通过Key找到一个List，就将当前遍历的字符串加入List中即可，最后，别忘了把更新后的List重新加入到map当中</p>
-</li>
-<li><pre><code class="java">class Solution&#123;
-    public List&lt;List&lt;String&gt;&gt; groupAnagrams(String[] strs)&#123;
-        Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;String, List&lt;String&gt;&gt;();
-        for(String str : strs)&#123;
-            char[] array = toCharArray();
-            Arrays.sort(array);
-            String key = new String(array);
-            List&lt;String&gt; list = map.getOrDefault(key,new ArrayList&lt;String&gt;());
-            list.add(str);
-            map.put(key, list);
-        &#125;
-        return new ArrayList&lt;List&lt;String&gt;&gt; (map.values());
-    &#125;
-&#125;
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>总结：本题关键点在于如何确定字母异位词之间的key，以及怎么取出map中的list并且修改。最后返回的结果也是一种技巧，map的使用还不太熟练</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-  </entry>
-  <entry>
     <title>2.1 CPU是如何执行程序的</title>
     <url>/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/</url>
     <content><![CDATA[<ul>
@@ -350,6 +194,269 @@
 ]]></content>
       <categories>
         <category>图解系统</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>二叉树12.3</title>
+    <url>/2023/12/03/%E4%BA%8C%E5%8F%89%E6%A0%9112-3/</url>
+    <content><![CDATA[<h1 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236.二叉树的最近公共祖先"></a>236.二叉树的最近公共祖先</h1><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<span id="more"></span>
+
+<p>例如，给定如下二叉树: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4]</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201016173414722.png" alt="236. 二叉树的最近公共祖先"></p>
+<ul>
+<li>找最近的公共祖先，首先想到能自底向上查就好了，那二叉树该怎么自底向上查询呢？<ul>
+<li>当然是后序遍历了，后序遍历就是一个天然的回溯过程</li>
+</ul>
+</li>
+<li>这道题目要遍历整棵树，因为 p 和 q 的位置是随机的，可能分别分布在根节点的两棵左右子树上</li>
+<li>直接上代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span> || root == p || root == q) &#123; <span class="comment">// 递归结束条件</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 后序遍历</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> lowestCommonAncestor(root.left, p, q);</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> lowestCommonAncestor(root.right, p, q);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若未找到节点 p 或 q</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left != <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123; <span class="comment">// 若找到两个节点</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过画图来模拟程序的运行过程可以加深对此代码的理解</li>
+</ul>
+<hr>
+<h1 id="235-二叉搜索树的最近公共祖先"><a href="#235-二叉搜索树的最近公共祖先" class="headerlink" title="235.二叉搜索树的最近公共祖先"></a>235.二叉搜索树的最近公共祖先</h1><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>例如，给定如下二叉搜索树: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5]</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201018172243602.png" alt="235. 二叉搜索树的最近公共祖先"></p>
+<ul>
+<li>找的是在二叉搜索树中的最近公共祖先，要时刻记住，二叉搜索树的中序遍历是有序的，要充分利用这个特性</li>
+<li>要找p 和 q 的公共祖先，我们可以从上到下迭代遍历，<strong>当第一次遇到节点的值是在[p,q]之间后，这个节点一定就是最近的公共祖先了</strong>。这也正是最巧妙的地方</li>
+<li>可以模拟来论证，当 p &#x3D; 0， q &#x3D; 5时，从根节点开始遍历，遍历到结点2时，可以发现2在p和q之间，此时如果继续往下，向左遍历，那么结点2会错过成为5的祖先。</li>
+<li>直接上代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (root.val &gt; p.val &amp;&amp; root.val &gt; q.val) &#123;</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &lt; p.val &amp;&amp; root.val &lt; q.val) &#123;</span><br><span class="line">                root = root.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>迭代法的代码看上去可读性高些，递归法看上去更简便些</li>
+</ul>
+<hr>
+<h1 id="每日一题-1423-可获得的最大点数"><a href="#每日一题-1423-可获得的最大点数" class="headerlink" title="每日一题 1423.可获得的最大点数"></a>每日一题 1423.可获得的最大点数</h1><ul>
+<li><p>几张卡牌 <strong>排成一行</strong>，每张卡牌都有一个对应的点数。点数由整数数组 <code>cardPoints</code> 给出。每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 <code>k</code> 张卡牌。你的点数就是你拿到手中的所有卡牌的点数之和。给你一个整数数组 <code>cardPoints</code> 和整数 <code>k</code>，请你返回可以获得的最大点数。</p>
+</li>
+<li><p>解题思路</p>
+<ul>
+<li>每次都只能从两头取牌，看到题目首先想到每次取两头中最大的牌，最后的结果不就是最大的结果了吗？这种想法显然太稚嫩了</li>
+<li>因为你不知道左右两边中间的牌是否更大，简单来说就是这样（5，1，1000，2），你只能取两张牌（k&#x3D;2），如果每次都取两边最大的，那么最后的大牌1000，就取不到了。</li>
+<li>翻看题解，主要有两种思路，一种是前缀和，一种是滑动窗口。后者的思路比较能让笔者接收，属于是鄙人的舒适区了。</li>
+<li>先来看滑动窗口。题目不是要求最后的最大值吗，我直接整一个滑动窗口从头开始遍历，滑动窗口的长度为牌数减去最后取得的牌数（len &#x3D; length - k），遍历完成后得到最小的滑动窗口值（min），那么用整幅牌的总和sum减去这个min值，就可以求得最终手里牌的最大值。很巧妙，逆向思维加个滑动窗口。</li>
+<li>直接上代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> cardPoints.length, len = n - k;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>, cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            sum += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            cur += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> cur;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> len; i &lt; n; i++)&#123;</span><br><span class="line">            cur = cur + cardPoints[i] - cardPoints[i - len];</span><br><span class="line">            min = Math.min(min, cur);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum - min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另一种解法：前缀和</p>
+</li>
+<li><p>前缀和的概念有些遗忘了，直接上代码</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> cardPoints.length;</span><br><span class="line">        <span class="type">int</span> []pre = <span class="keyword">new</span> <span class="title class_">int</span>[len+<span class="number">1</span>]; pre[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; len;i++)&#123;</span><br><span class="line">            pre[i+<span class="number">1</span>] = cardPoints[i] + pre[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt;= k;i++)&#123;</span><br><span class="line">            max = Math.max(max, pre[i] + pre[len] - pre[len-k+i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：imcover</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/solutions/220256/qian-zhui-he-xie-fa-by-imcover/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>动态规划12.7</title>
+    <url>/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇是动态规划三刷的开始，认真学习，认真输出！</p>
+<p>解决动态规划系列问题，最重要的就是动规五部曲，即</p>
+<ul>
+<li>确定dp数组以及下标的含义</li>
+<li>确定递推公式</li>
+<li>初始化dp数组</li>
+<li>确定遍历顺序</li>
+<li>举例推导dp数组</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509. 斐波那契数"></a>509. 斐波那契数</h1><p>斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： <code>F(0) = 0，F(1) = 1 </code>，<code>F(n) = F(n - 1) + F(n - 2)</code>，其中<code> n &gt; 1</code> 给你n ，请计算 F(n) 。</p>
+<ul>
+<li><p>超级简单的一题，但是是一道练习运用动规五部曲的好题</p>
+</li>
+<li><p>首先第一步，确定<code>dp</code>数组以及下标的定义</p>
+<ul>
+<li>题目要求求出F(n),题目也告诉我们<code>F(n) = F(n - 1) + F(n - 2)</code>，显然，我们的<code>dp</code>数组可以表示为<code>dp[i]</code></li>
+</ul>
+</li>
+<li><p>顺其自然，确定递归公式：<code>dp[i] = dp[i-1]+dp[i-2]</code></p>
+</li>
+<li><p>第三步，初始化<code>dp</code>数组，题目又告诉我们，<code>F(0) = 0，F(1) = 1</code>,则我们应这样初始化，<code>dp[0]=0</code>,<code>dp[1]=1</code></p>
+</li>
+<li><p>第四步，确定遍历顺序，我们知道，<code>dp[i]</code> 是由它前两个数推出来的，那么我们的遍历顺序是不是应该从前往后呢？</p>
+</li>
+<li><p>第五步，举例推导<code>dp</code> 数组，很简单</p>
+</li>
+<li><p>直接上代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span> || n == <span class="number">1</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>有没有可以优化的地方呢？</p>
+<ul>
+<li><p>空间上是可以优化的，我们只需要两个数值就可以了，不需要创建一个数组</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> N)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(N &lt;= <span class="number">1</span>) <span class="keyword">return</span> N;</span><br><span class="line">            <span class="type">int</span> <span class="variable">dp0</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">dp1</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= N; i++)&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">tem</span> <span class="operator">=</span> dp0 + dp1;</span><br><span class="line">                dp0 = dp1;</span><br><span class="line">                dp1 = tem;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> dp[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>当然，这题还能用递归来解决</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> N)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(N &lt; <span class="number">2</span>) <span class="keyword">return</span> N;</span><br><span class="line">        <span class="keyword">return</span> fib(N-<span class="number">1</span>)+fib(N-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结，简单题是用来掌握方法论的，多多尝试动规五部曲吧</p>
+</li>
+</ul>
+<hr>
+<h1 id="每日一题-49-字母异位词分组"><a href="#每日一题-49-字母异位词分组" class="headerlink" title="每日一题-49.字母异位词分组"></a>每日一题-49.字母异位词分组</h1><p>给你一个字符串数组，请你将 <strong>字母异位词</strong> 组合在一起。可以按任意顺序返回结果列表。</p>
+<p><strong>字母异位词</strong> 是由重新排列源单词的所有字母得到的一个新单词。</p>
+<ul>
+<li><p>这道题是<code>Hot100</code>里哈希的题目，刚开始看到题目还没怎么看懂,后来看了看示例，才发现是那么一回事：要将题目给定的字符串数组里，由相同字母组成的字符串堆在一起，比如<code>&quot;rea&quot;,&quot;era&quot;,&quot;ear&quot;</code>这几个单词，这就是字母异位词，将他们放入同一个数组里再输出即可。</p>
+</li>
+<li><p>那么要将这几个单词堆在一起呢？</p>
+<ul>
+<li><p>这是一道哈希的题目，我们都应该想到，要用到<code>map</code>或者<code>set</code>, 笔者刚开始的思路是这样的，遍历每一个字符串，用一个26位的数组来统计字符串中每个字母的出现次数，然后将其用<code>map</code> 记录下来，这思路没错，但是笔者智商有限，不能将其用代码表达出来，况且还有很多细节没想到，所以直接奔题解去</p>
+</li>
+<li><p>官方题解是这样的，它提供了两种方法，本人认为方法一更能让人接受。思路如下：</p>
+<ul>
+<li><p>由于互为字母异位词的字符串他们所包含的字母是相同的，那么我们分别对他们进行字符串排序后，所得的排序后字符串不就是相同的吗，既然有相同的点了，我们是不是可以把这相同点当作map的键(key)。</p>
+</li>
+<li><p>然后再根据所得的键在map中寻找相应的值，map中的值应该是一个List元素，里面存储着互为字母异位词的各个单词，一旦我们通过Key找到一个List，就将当前遍历的字符串加入List中即可，最后，别忘了把更新后的List重新加入到map当中</p>
+</li>
+<li><pre><code class="java">class Solution&#123;
+    public List&lt;List&lt;String&gt;&gt; groupAnagrams(String[] strs)&#123;
+        Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;String, List&lt;String&gt;&gt;();
+        for(String str : strs)&#123;
+            char[] array = toCharArray();
+            Arrays.sort(array);
+            String key = new String(array);
+            List&lt;String&gt; list = map.getOrDefault(key,new ArrayList&lt;String&gt;());
+            list.add(str);
+            map.put(key, list);
+        &#125;
+        return new ArrayList&lt;List&lt;String&gt;&gt; (map.values());
+    &#125;
+&#125;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>总结：本题关键点在于如何确定字母异位词之间的key，以及怎么取出map中的list并且修改。最后返回的结果也是一种技巧，map的使用还不太熟练</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>计算机网络12.7</title>
+    <url>/2023/12/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C12-7/</url>
+    <content><![CDATA[<h1 id="OSI-七层参考模型"><a href="#OSI-七层参考模型" class="headerlink" title="OSI 七层参考模型"></a>OSI 七层参考模型</h1><ul>
+<li>口诀：从下至上依次为“<code>物、数、网、传、会、表、应</code>”</li>
+<li>物理层：主要定义的是物理设备的标准。比如要定义网线的接口类型、光纤的接口类型，传输介质间的传输速率等。这一层的数据叫做<code>比特</code>，主要传输<strong>比特流</strong>，比特流就是由0或1转化为电流强弱来进行传输。</li>
+<li>数据链路层：建立逻辑连接、硬件地址寻址，差错校验等功能。这一层的数据叫做<strong>帧</strong>，数据在这一层会以帧为单位进行传输。在这一层封装MAC地址。</li>
+<li>网络层：进行逻辑地址寻址。**<code>IP</code>协议**就在这层</li>
+<li>传输层：<code>TCP</code>协议和<code>UDP</code>协议都在这层，这一层的数据叫做段</li>
+<li>会话层：通过传输层（端⼜号：传输端⼜与接收端⼜）建⽴数据传输的通路。主要在你的系统之间发起会话或者 接受会话请求。</li>
+<li>表⽰层：数据的表⽰、安全、压缩。主要是进⾏对接收的数据进⾏解释、加密与解密、压缩与解压缩等（也就是 把计算机能够识别的东西转换成⼈能够能识别的东西（如图⽚、声⾳等）。</li>
+<li>应⽤层：⽹络服务与最终⽤户的⼀个接⼜。这⼀层为⽤户的应⽤程序（例如电⼦邮件、⽂件传输和终端仿真）提 供⽹络服务。</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="TCP-IP网络模型"><a href="#TCP-IP网络模型" class="headerlink" title="TCP&#x2F;IP网络模型"></a><code>TCP</code>&#x2F;<code>IP</code>网络模型</h1><ul>
+<li><p>首先为什么要有<code>TCP/IP</code> 网络模型？</p>
+<ul>
+<li>对于不同设备上的进程间通信，需要网络通信，而设备是多样性的，所以要兼容多种多样的设备，就协商出了一套<strong>通用的网络协议</strong>。</li>
+</ul>
+</li>
+<li><p>应用层</p>
+<ul>
+<li>我们使用的应用都是在这一层实现的，当两个不同设备的应用进行通信时，应用会把数据传输给下一层，也就是传输层。</li>
+<li>所以应用层只需要关注应用功能的实现就好了，不需要操心发送的事，就像寄快递一样，我们打包好要寄的东西，交给快递站就好了，怎么送是快递站的事</li>
+<li>另外要注意，只有应用层是工作在操作系统的用户态的，传输层及以下则工作在内核态</li>
+<li>这一层的相关协议有：<code>HTTP，FTP，Telnet，DNS，SMTP</code>等</li>
+</ul>
+</li>
+<li><p>传输层</p>
+<ul>
+<li>应用层的数据会传给传输层，传输层是给应用层提供网络支持的</li>
+<li>传输层有两个重要的协议，分别是<code>TCP</code> 和<code>UDP</code><ul>
+<li><code>TCP</code>的全称叫做<code>Transmission Control Protocol</code> ，即传输控制协议。大部分应用使用的都是TCP传输协议，比如HTTP协议，因为TCP的许多特性，比如流量控制、拥塞控制、超时重传等，都是为了保证数据包能可靠地传给目标7</li>
+<li><code>UDP</code>相对比较简单，只负责发送数据包，没有可靠保证，但这也意味着传输效率会相对高些。当然，<code>UDP</code>也能实现可靠传输，不过是要在应用层上实现，以后会说到</li>
+</ul>
+</li>
+<li>TCP有一个属性叫做TCP最大报文段长度(<code>MSS</code>)，如果传输层的数据包大小超过了<code>MSS</code>，就要将数据包分块，分出来的块就叫做TCP段</li>
+<li>传输层的报文中主要会携带端口号，根据端口号，我们可以找到正在通信的进程（应用），因为在同一时刻，一个设备中会有多个进程（应用）在通信，我们必须要使用端口号来区分这些正在通信的进程</li>
+</ul>
+</li>
+<li><p>网络层</p>
+<ul>
+<li><p>数据实际的传输功能，是在网络层实现的</p>
+<ul>
+<li>因为传输层的设计理念是简单、高效、专注，如果让传输层负责让数据在错综复杂的网络中传输，这就有些违背它的设计原则了</li>
+</ul>
+</li>
+<li><p>网络层最常用的当然就是<code>IP</code>(Internet Protocol)协议了，<code>IP</code>协议会将上层传输层的报文当作数据部分，然后在前面加上<code>IP</code>包头，这样就组装成了<code>IP</code>报文。如果<code>IP</code>报文长度超过了<code>MTU</code>，此<code>IP</code>报文会被分片，再一次传到下一层</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E8%BF%87%E7%A8%8B/12.jpg" alt="img"></p>
+</li>
+<li><p>网络层要实现的是两台不同设备间的通信，世界上那么多台设备，要怎么找到对方呢？当然是通过<code>IP</code> 地址了。<code>IP</code>地址之后会着重介绍</p>
+</li>
+<li><p><code>IP</code> 协议的寻址作用是告诉我们去往下一个目的地该朝哪个方向走，路由则是根据「下一个目的地」选择路径。寻址更像在导航，路由更像在操作方向盘。</p>
+</li>
+</ul>
+</li>
+<li><p>网络接口层</p>
+<ul>
+<li><code>IP</code>数据包会被传输到网络接口层，在这一层里，往IP头部前面加上MAC头部，封装成数据帧后，就要真正地进入网络中了。</li>
+<li>IP 头部中的接收方 IP 地址表示网络包的目的地，通过这个地址我们就可以判断要将包发到哪里，但在以太网的世界中，这个思路是行不通的。</li>
+<li>什么是以太网呢？电脑上的以太网接口，Wi-Fi接口，以太网交换机、路由器上的千兆，万兆以太网口，还有网线，它们都是以太网的组成部分。以太网就是一种在「局域网」内，把附近的设备连接起来，使它们之间可以进行通讯的技术。</li>
+<li>以太网在判断网络包目的地时和 IP 的方式不同，因此必须采用相匹配的方式才能在以太网中将包发往目的地，而 MAC 头部就是干这个用的，所以，在以太网进行通讯要用到 MAC 地址。</li>
+<li>MAC 头部是以太网使用的头部，它包含了接收方和发送方的 MAC 地址等信息，我们可以通过 ARP 协议获取对方的 MAC 地址。</li>
+<li>所以说，网络接口层主要为网络层提供「链路级别」传输的服务，负责在以太网、WiFi 这样的底层网络上发送原始数据包，工作在网卡这个层次，使用 MAC 地址来标识网络上的设备。</li>
+</ul>
+</li>
+<li><p>总结</p>
+<ul>
+<li><p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.drawio.png" alt="img"></p>
+</li>
+<li><p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%B5%AE%E7%82%B9/%E5%B0%81%E8%A3%85.png" alt="img"></p>
+</li>
+<li><p>网络接口层的传输单位是帧（frame），IP 层的传输单位是包（packet），TCP 层的传输单位是段（segment），HTTP 的传输单位则是消息或报文（message）。但这些名词并没有什么本质的区分，可以统称为数据包。</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="键入网址到网页显示，在这期间发生了什么？"><a href="#键入网址到网页显示，在这期间发生了什么？" class="headerlink" title="键入网址到网页显示，在这期间发生了什么？"></a>键入网址到网页显示，在这期间发生了什么？</h1><ul>
+<li><p>第一步，解析地址栏上的网址(URL)，得到Web服务器和文件名</p>
+</li>
+<li><p>第二步，根据第一步得到的内容生成HTTP请求信息</p>
+</li>
+<li><p>第三步，生成了HTTP请求消息，就要将这个消息发送给Web服务器了，但是要往哪发送呢？这时候是不知道Web服务器的地址的。怎么办？这时候就需要DNS协议出马，通过DNS查询得到目的服务器的IP地址</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E8%BF%87%E7%A8%8B/6.jpg" alt="域名解析的工作流程"></p>
+</li>
+<li><p>第四步，得到了<code>IP</code> 地址，相当于知道了要发送数据的目的地在哪。</p>
+</li>
+<li><p>第五步，TCP确认端口号，生成TCP报文</p>
+</li>
+<li><p>第六步，IP报文生成</p>
+</li>
+<li><p>第七步，MAC数据帧</p>
+</li>
+<li><p>第八步，网卡</p>
+</li>
+<li><p>第九步，交换机</p>
+</li>
+<li><p>第十步，路由器</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>八股文-计算机网络篇</category>
       </categories>
   </entry>
 </search>

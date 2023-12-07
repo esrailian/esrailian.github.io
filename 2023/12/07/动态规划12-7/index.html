@@ -22,25 +22,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"esrailian.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="esrailian的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="宇宙松饼">
-<meta property="og:url" content="https://esrailian.github.io/index.html">
+    <meta name="description" content="前言本篇是动态规划三刷的开始，认真学习，认真输出！ 解决动态规划系列问题，最重要的就是动规五部曲，即  确定dp数组以及下标的含义 确定递推公式 初始化dp数组 确定遍历顺序 举例推导dp数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划12.7">
+<meta property="og:url" content="https://esrailian.github.io/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/index.html">
 <meta property="og:site_name" content="宇宙松饼">
-<meta property="og:description" content="esrailian的博客">
+<meta property="og:description" content="前言本篇是动态规划三刷的开始，认真学习，认真输出！ 解决动态规划系列问题，最重要的就是动规五部曲，即  确定dp数组以及下标的含义 确定递推公式 初始化dp数组 确定遍历顺序 举例推导dp数组">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-06T23:58:51.000Z">
+<meta property="article:modified_time" content="2023-12-07T00:56:51.771Z">
 <meta property="article:author" content="esrailian">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://esrailian.github.io/">
+<link rel="canonical" href="https://esrailian.github.io/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://esrailian.github.io/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/","path":"2023/12/07/动态规划12-7/","title":"动态规划12.7"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>宇宙松饼</title>
+<title>动态规划12.7 | 宇宙松饼</title>
   
 
 
@@ -73,7 +75,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">宇宙松饼</h1>
+      <p class="site-title">宇宙松饼</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -126,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -139,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#509-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">509. 斐波那契数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-49-%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">每日一题-49.字母异位词分组</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,16 +189,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://esrailian.github.io/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -209,13 +213,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 宇宙松饼">
+      <meta itemprop="name" content="动态规划12.7 | 宇宙松饼">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/" class="post-title-link" itemprop="url">动态规划12.7</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          动态规划12.7
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -239,6 +243,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
@@ -262,8 +273,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇是动态规划三刷的开始，认真学习，认真输出！</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇是动态规划三刷的开始，认真学习，认真输出！</p>
 <p>解决动态规划系列问题，最重要的就是动规五部曲，即</p>
 <ul>
 <li>确定dp数组以及下标的含义</li>
@@ -272,124 +282,82 @@
 <li>确定遍历顺序</li>
 <li>举例推导dp数组</li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+<span id="more"></span>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
+<h1 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509. 斐波那契数"></a>509. 斐波那契数</h1><p>斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： <code>F(0) = 0，F(1) = 1 </code>，<code>F(n) = F(n - 1) + F(n - 2)</code>，其中<code> n &gt; 1</code> 给你n ，请计算 F(n) 。</p>
+<ul>
+<li><p>超级简单的一题，但是是一道练习运用动规五部曲的好题</p>
+</li>
+<li><p>首先第一步，确定<code>dp</code>数组以及下标的定义</p>
+<ul>
+<li>题目要求求出F(n),题目也告诉我们<code>F(n) = F(n - 1) + F(n - 2)</code>，显然，我们的<code>dp</code>数组可以表示为<code>dp[i]</code></li>
+</ul>
+</li>
+<li><p>顺其自然，确定递归公式：<code>dp[i] = dp[i-1]+dp[i-2]</code></p>
+</li>
+<li><p>第三步，初始化<code>dp</code>数组，题目又告诉我们，<code>F(0) = 0，F(1) = 1</code>,则我们应这样初始化，<code>dp[0]=0</code>,<code>dp[1]=1</code></p>
+</li>
+<li><p>第四步，确定遍历顺序，我们知道，<code>dp[i]</code> 是由它前两个数推出来的，那么我们的遍历顺序是不是应该从前往后呢？</p>
+</li>
+<li><p>第五步，举例推导<code>dp</code> 数组，很简单</p>
+</li>
+<li><p>直接上代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span> || n == <span class="number">1</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://esrailian.github.io/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="esrailian">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙松饼">
-      <meta itemprop="description" content="esrailian的博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 宇宙松饼">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/" class="post-title-link" itemprop="url">2.1 CPU是如何执行程序的</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-12-06 15:43:13 / 修改时间：17:46:16" itemprop="dateCreated datePublished" datetime="2023-12-06T15:43:13+08:00">2023-12-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">图解系统</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.8k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>首先提出三个问题：<ul>
-<li>一条简单的代码 <code>a = 1 + 2</code> 是怎么被CPU执行起来的呢？</li>
-<li>安装软件时，有32位和64位供我们选择，这两者的区别是什么呢？再者，32位的操作系统可以在64位的电脑上运行吗？反过来能运行吗？</li>
-<li>我们知道CPU通常分为32位和64位，那么64位相对于32位的优势在哪？64位的CPU性能一定比32位CPU高很多吗？</li>
-<li>这些问题都会在本文中得到解答</li>
+</li>
+<li><p>有没有可以优化的地方呢？</p>
+<ul>
+<li><p>空间上是可以优化的，我们只需要两个数值就可以了，不需要创建一个数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    	<span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> N)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(N &lt;= <span class="number">1</span>) <span class="keyword">return</span> N;</span><br><span class="line">            <span class="type">int</span> <span class="variable">dp0</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">dp1</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= N; i++)&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">tem</span> <span class="operator">=</span> dp0 + dp1;</span><br><span class="line">                dp0 = dp1;</span><br><span class="line">                dp1 = tem;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> dp[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>当然，这题还能用递归来解决</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> N)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(N &lt; <span class="number">2</span>) <span class="keyword">return</span> N;</span><br><span class="line">        <span class="keyword">return</span> fib(N-<span class="number">1</span>)+fib(N-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结，简单题是用来掌握方法论的，多多尝试动规五部曲吧</p>
+</li>
+</ul>
+<hr>
+<h1 id="每日一题-49-字母异位词分组"><a href="#每日一题-49-字母异位词分组" class="headerlink" title="每日一题-49.字母异位词分组"></a>每日一题-49.字母异位词分组</h1><p>给你一个字符串数组，请你将 <strong>字母异位词</strong> 组合在一起。可以按任意顺序返回结果列表。</p>
+<p><strong>字母异位词</strong> 是由重新排列源单词的所有字母得到的一个新单词。</p>
+<ul>
+<li><p>这道题是<code>Hot100</code>里哈希的题目，刚开始看到题目还没怎么看懂,后来看了看示例，才发现是那么一回事：要将题目给定的字符串数组里，由相同字母组成的字符串堆在一起，比如<code>&quot;rea&quot;,&quot;era&quot;,&quot;ear&quot;</code>这几个单词，这就是字母异位词，将他们放入同一个数组里再输出即可。</p>
+</li>
+<li><p>那么要将这几个单词堆在一起呢？</p>
+<ul>
+<li><p>这是一道哈希的题目，我们都应该想到，要用到<code>map</code>或者<code>set</code>, 笔者刚开始的思路是这样的，遍历每一个字符串，用一个26位的数组来统计字符串中每个字母的出现次数，然后将其用<code>map</code> 记录下来，这思路没错，但是笔者智商有限，不能将其用代码表达出来，况且还有很多细节没想到，所以直接奔题解去</p>
+</li>
+<li><p>官方题解是这样的，它提供了两种方法，本人认为方法一更能让人接受。思路如下：</p>
+<ul>
+<li><p>由于互为字母异位词的字符串他们所包含的字母是相同的，那么我们分别对他们进行字符串排序后，所得的排序后字符串不就是相同的吗，既然有相同的点了，我们是不是可以把这相同点当作map的键(key)。</p>
+</li>
+<li><p>然后再根据所得的键在map中寻找相应的值，map中的值应该是一个List元素，里面存储着互为字母异位词的各个单词，一旦我们通过Key找到一个List，就将当前遍历的字符串加入List中即可，最后，别忘了把更新后的List重新加入到map当中</p>
+</li>
+<li><pre><code class="java">class Solution&#123;
+    public List&lt;List&lt;String&gt;&gt; groupAnagrams(String[] strs)&#123;
+        Map&lt;String, List&lt;String&gt;&gt; map = new HashMap&lt;String, List&lt;String&gt;&gt;();
+        for(String str : strs)&#123;
+            char[] array = toCharArray();
+            Arrays.sort(array);
+            String key = new String(array);
+            List&lt;String&gt; list = map.getOrDefault(key,new ArrayList&lt;String&gt;());
+            list.add(str);
+            map.put(key, list);
+        &#125;
+        return new ArrayList&lt;List&lt;String&gt;&gt; (map.values());
+    &#125;
+&#125;
+</code></pre>
+</li>
 </ul>
 </li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+</li>
+<li><p>总结：本题关键点在于如何确定字母异位词之间的key，以及怎么取出map中的list并且修改。最后返回的结果也是一种技巧，map的使用还不太熟练</p>
+</li>
+</ul>
+
     </div>
 
     
@@ -397,113 +365,39 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>esrailian
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://esrailian.github.io/2023/12/07/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-7/" title="动态规划12.7">https://esrailian.github.io/2023/12/07/动态规划12-7/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
 
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://esrailian.github.io/2023/12/03/%E4%BA%8C%E5%8F%89%E6%A0%9112-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="esrailian">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙松饼">
-      <meta itemprop="description" content="esrailian的博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 宇宙松饼">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/03/%E4%BA%8C%E5%8F%89%E6%A0%9112-3/" class="post-title-link" itemprop="url">二叉树12.3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-12-03 07:39:39 / 修改时间：09:24:24" itemprop="dateCreated datePublished" datetime="2023-12-03T07:39:39+08:00">2023-12-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236.二叉树的最近公共祖先"></a>236.二叉树的最近公共祖先</h1><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/03/%E4%BA%8C%E5%8F%89%E6%A0%9112-3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/" rel="prev" title="2.1 CPU是如何执行程序的">
+                  <i class="fa fa-angle-left"></i> 2.1 CPU是如何执行程序的
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 

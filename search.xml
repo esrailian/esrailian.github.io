@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>三次握手和四次挥手</title>
+    <url>/2023/12/09/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>八股文-计算机网络篇</category>
+      </categories>
+  </entry>
+  <entry>
     <title>2.1 CPU是如何执行程序的</title>
     <url>/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/</url>
     <content><![CDATA[<ul>
@@ -345,6 +353,95 @@
 </ul>
 </li>
 <li><p>总结：本题关键点在于如何确定字母异位词之间的key，以及怎么取出map中的list并且修改。最后返回的结果也是一种技巧，map的使用还不太熟练</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>动态规划12-13</title>
+    <url>/2023/12/13/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-13/</url>
+    <content><![CDATA[<h1 id="不同的二叉搜索树"><a href="#不同的二叉搜索树" class="headerlink" title="不同的二叉搜索树"></a>不同的二叉搜索树</h1><p>给定一个整数 n，求以 1 … n 为节点组成的二叉搜索树有多少种？</p>
+<p>示例:</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210113161941835.png" alt="img"></p>
+<span id="more"></span>
+
+<ul>
+<li><p>这是关于一道用动态规划解决二叉树问题的题目，刚开始看到题目的时候，很难想到动态规划</p>
+</li>
+<li><p>题目要求的是由n个节点，这n个节点可以组成多少种不同的二叉搜索树</p>
+</li>
+<li><p>与常规的动规五部曲不同，我们先找规律，看是否能找到当前状态是否能由上一个状态推出来，若是有，我们就可以开始求递推公式了</p>
+</li>
+<li><p>当n为1时以及n为2时</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210107093106367.png" alt="96.不同的二叉搜索树"></p>
+</li>
+<li><p>当n为3时</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210107093129889.png" alt="96.不同的二叉搜索树1"></p>
+</li>
+<li><p>看看n为3的时候，有哪几种情况。</p>
+<p>当1为头结点的时候，其右子树有两个节点，看这两个节点的布局，是不是和 n 为2的时候两棵树的布局是一样的</p>
+<p>当3为头结点的时候，其左子树有两个节点，看这两个节点的布局，是不是和n为2的时候两棵树的布局也是一样的啊！</p>
+<p>当2为头结点的时候，其左右子树都只有一个节点，布局是不是和n为1的时候只有一棵树的布局也是一样的啊！</p>
+<p>发现到这里，其实我们就找到了重叠子问题了，其实也就是发现可以通过dp[1] 和 dp[2] 来推导出来dp[3]的某种方式。</p>
+<p>dp[3]，就是 元素1为头结点搜索树的数量 + 元素2为头结点搜索树的数量 + 元素3为头结点搜索树的数量</p>
+</li>
+<li><p>第一步，确定dp数组以及下标含义</p>
+<ul>
+<li>dp[i]: 1到i为节点组成的二叉搜索树的个数为dp[i]</li>
+</ul>
+</li>
+<li><p>第二步，确定递推公式</p>
+<ul>
+<li>dp[i] +&#x3D; dp[j - 1] * dp[i - j]</li>
+<li>j-1 表示 j 为头结点时左子树节点数量； i-j 表示 j 为头结点时右子树结点数量</li>
+</ul>
+</li>
+<li><p>第三步，初始化dp数组</p>
+<ul>
+<li>dp[0] &#x3D; 1</li>
+</ul>
+</li>
+<li><p>直接上代码</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numTrees</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">        <span class="comment">//初始化dp数组</span></span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">dp</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= i; j++)&#123;</span><br><span class="line">                dp[i] += dp[j - <span class="number">1</span>] * dp[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="盛最多水的容器-（双指针）"><a href="#盛最多水的容器-（双指针）" class="headerlink" title="盛最多水的容器 （双指针）"></a>盛最多水的容器 （双指针）</h1><p>给定一个长度为 <code>n</code> 的整数数组 <code>height</code> 。有 <code>n</code> 条垂线，第 <code>i</code> 条线的两个端点是 <code>(i, 0)</code> 和 <code>(i, height[i])</code> 。</p>
+<p>找出其中的两条线，使得它们与 <code>x</code> 轴共同构成的容器可以容纳最多的水。</p>
+<p>返回容器可以储存的最大水量。</p>
+<p><strong>说明：</strong>你不能倾斜容器。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="img"></p>
+<ul>
+<li><p>他们做这题的时候，是怎么想到双指针的？😭</p>
+</li>
+<li><p>思路</p>
+<ul>
+<li><p>将两指针(i,j)分别指向数组的前后两端，那么此时容器的体积就应该为</p>
+<p><code>(j-i)*min(nums[i], nums[j])</code> ,用一个全局变量保存结果，则解决这道题目的核心表达式就为<code>res = max(res, (j-i)*min(nums[i], nums[j]))</code></p>
+</li>
+<li><p>然后我们要怎么移动这两指针呢？是同时移动他们吗？</p>
+<ul>
+<li>并不是，要想找到最大的结果，我们是不是应该移动对应<code>nums</code> 值较小的那个指针，“幻想着下一个值会比现在要大”，即使移动后的值比之前还要小，也没有关系，毕竟我们已经保存了最大的那个结果</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>思路就这样，直接上代码</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxArea</span><span class="params">(<span class="type">int</span>[] height)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = height.length - <span class="number">1</span>; i &lt; j; )&#123;</span><br><span class="line">            res = Math.max(res, (j - i)Math.min(height[i], height[j]));</span><br><span class="line">            <span class="keyword">if</span>(height[i] &lt; height[j])&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;<span class="keyword">else</span> j--;  <span class="comment">//当它两相等时，移动哪个指针都无所谓</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>总结<ul>
+<li>双指针题目逻辑其实并不难，刚开始做题的时候，自己也尝试着用双指针来解决，但是实在不知道怎么遍历，怎么求结果。看了题解后，跟着代码模拟了一遍才知道思路</li>
+<li>既然智商不够，就只能用熟练度来弥补了</li>
+<li>我亦无他，唯手熟尔</li>
+</ul>
 </li>
 </ul>
 ]]></content>

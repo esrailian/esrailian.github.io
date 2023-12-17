@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>三次握手和四次挥手</title>
-    <url>/2023/12/09/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>八股文-计算机网络篇</category>
-      </categories>
-  </entry>
-  <entry>
     <title>2.1 CPU是如何执行程序的</title>
     <url>/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/</url>
     <content><![CDATA[<ul>
@@ -202,6 +194,14 @@
 ]]></content>
       <categories>
         <category>图解系统</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>三次握手和四次挥手</title>
+    <url>/2023/12/09/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>八股文-计算机网络篇</category>
       </categories>
   </entry>
   <entry>
@@ -554,6 +554,104 @@
 ]]></content>
       <categories>
         <category>八股文-计算机网络篇</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>动态规划总结</title>
+    <url>/2023/12/17/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="周小结（01背包不同维度上的应用）"><a href="#周小结（01背包不同维度上的应用）" class="headerlink" title="周小结（01背包不同维度上的应用）"></a>周小结（01背包不同维度上的应用）</h1><ul>
+<li><p>求装满背包有几种方法，</p>
+<ul>
+<li>其递推公式基本都是 <code>dp[j] += dp[j - nums[i]]</code> </li>
+<li><code>dp</code> 数组的含义是<strong>装满容量为j的背包，有几种方法</strong> </li>
+<li>其遍历顺序是外层遍历物品，内层遍历背包(target),且内层为倒序遍历</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li>例题——–目标和</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findTargetSumWays</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//target 过大， sum无法满足</span></span><br><span class="line">        <span class="keyword">if</span>(target &lt; <span class="number">0</span> &amp;&amp; sum &lt; -target) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>((target + sum) % <span class="number">2</span> != <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> (target + sum) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(left &lt; <span class="number">0</span>) left = -left;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">dp</span>[left + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> left; j &gt;= nums[i]; j++)&#123;</span><br><span class="line">                dp[j] += dp[j - nums[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[left];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>纯01背包就是给定背包容量，求装满背包的最大价值是多少</p>
+<ul>
+<li><code>dp[j] = max(dp[j], dp[j - weight[i]] + values[i])</code></li>
+</ul>
+</li>
+<li><p>给定背包容量，问能不能装满这个背包</p>
+<ul>
+<li>和求最大值一样，不过最后要判断<code>dp[target]</code> 与<code>target</code> 是否相等，如果相等，那么表示可以装满这个背包，否则不能</li>
+<li><code>dp[j] = max(dp[j], dp[j - weight[i]] + values[i])</code></li>
+</ul>
+</li>
+<li><p>求给定背包容量，尽可能装，最多能装多少</p>
+<ul>
+<li>石头粉碎的问题，求最后能剩多少，不妨转变一下思路，求出最多能粉碎多少石头，也就是能给定容量<code>target = sum / 2</code>的背包 ,装满这个背包能有多少价值，即<code>dp[target]</code> ,最后 <code>sum - 2 * dp[target]</code> ,可能正好能全部粉碎，即0，也可能剩一点</li>
+<li><code>dp[j] = max(dp[j], dp[j - stones[i]] + stones[i])</code></li>
+</ul>
+</li>
+<li><p>给定背包容量，装满背包最多有多少个物品</p>
+<ul>
+<li><p>例子—一和零</p>
+</li>
+<li><p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
+<p>请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
+<p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入：strs &#x3D; [“10”, “0001”, “111001”, “1”, “0”], m &#x3D; 5, n &#x3D; 3</li>
+<li>输出：4</li>
+<li>解释：最多有 5 个 0 和 3 个 1 的最大子集是 {“10”,”0001”,”1”,”0”} ，因此答案是 4 。 其他满足题意但较小的子集包括 {“0001”,”1”} 和 {“10”,”1”,”0”} 。{“111001”} 不满足题意，因为它含 4 个 1 ，大于 n 的值 3</li>
+</ul>
+</li>
+<li><p>本题会有人认为是多重背包，但其实不是</p>
+<ul>
+<li>多重背包是每个物品数量不同的情况</li>
+<li>但这题的意思是这样的，数组<code>strs</code>里的元素是物品，求装满容量为m和n的这两个背包，最多有多少个物品，<code>strs</code>里的每一个集合就是一个物品，每个物品的数量是1，所以还是01背包问题.</li>
+<li><code>dp[i][j]</code>表示有 i 个0和 j 个1的最大子集的大小为<code>dp[i][j]</code></li>
+<li><code>dp[i][j] = max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1)</code></li>
+</ul>
+</li>
+<li><pre><code class="java">class Solution &#123;
+    public int findMaxForm(String[] strs, int m, int n) &#123;
+        //dp[i][j]表示i个0和j个1时的最大子集
+        int[][] dp = new int[m + 1][n + 1];
+        int oneNum, zeroNum;
+        for (String str : strs) &#123;
+            oneNum = 0;
+            zeroNum = 0;
+            for (char ch : str.toCharArray()) &#123;
+                if (ch == &#39;0&#39;) &#123;
+                    zeroNum++;
+                &#125; else &#123;
+                    oneNum++;
+                &#125;
+            &#125;
+            //倒序遍历
+            for (int i = m; i &gt;= zeroNum; i--) &#123;
+                for (int j = n; j &gt;= oneNum; j--) &#123;
+                    dp[i][j] = Math.max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);
+                &#125;
+            &#125;
+        &#125;
+        return dp[m][n];
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 完全背包</span><br><span class="line"></span><br><span class="line">  - 完全背包和01背包的区别就是完全背包的物品数量是无限的</span><br><span class="line">  - 递推公式是一样的，但是区别在遍历顺序上</span><br><span class="line">    - 01背包二维数组遍历时，先遍历物品再遍历背包和先遍历背包再遍历物品是一样的；**但是01背包一维数组时，必须先遍历物品，再遍历背包，且遍历背包时，必须倒序遍历，确保物品只被加入一次**</span><br><span class="line">    - 完全背包的一维数组遍历，**先遍历物品在遍历背包时求组合数，先遍历背包再遍历物品是求排列数**。并且遍历背包时，都是正序遍历的，因为物品有无限个，可以加入多次</span><br><span class="line"></span><br><span class="line">  ------------------------------------------------</span><br><span class="line"></span><br><span class="line">  # 双指针题 --------接雨水</span><br><span class="line"></span><br><span class="line">  [42. 接雨水](https://leetcode.cn/problems/trapping-rain-water/)</span><br><span class="line"></span><br><span class="line">​	给定 `n` 个非负整数表示每个宽度为 `1` 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。**示例 1：**</span><br><span class="line"></span><br><span class="line">![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>输入：height &#x3D; [0,1,0,2,1,0,1,3,2,1,2,1]<br>输出：6<br>解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 本题思路</span><br><span class="line"></span><br><span class="line">  - 求每一列上的雨水，每一列上的雨水要怎么求呢？</span><br><span class="line"></span><br><span class="line">    - 记住，求 i 列上的雨水时，我们只需要找到 i 左边位置上最高的墙`max_left`和 i 右边位置上最高的墙`max_right`, 将两者之间的较小数`Math.min(max_left, max_right)` ,减去当前列 i 的高度，即`min - height[i]`, 当然是在</span><br><span class="line"></span><br><span class="line">      `min &gt; height`的条件下才能减去。</span><br><span class="line"></span><br><span class="line">    - 这样，这一列上的雨水就求出来了，把它加到最终结果即可</span><br><span class="line"></span><br><span class="line">  - 那要怎么优化呢？</span><br><span class="line"></span><br><span class="line">    - 我们发现每一次求左边最高和右边最高时，都需要for循环找出结果，时间复杂度会高</span><br><span class="line">    - 我们选择牺牲空间换时间，我们可以提前求出每一列左边的max_left[i] 和右边的max_right[i], 需要用到时，我们直接取就好了</span><br><span class="line"></span><br><span class="line">- 代码如下</span><br><span class="line"></span><br><span class="line">  ```java</span><br><span class="line">  class Solution&#123;</span><br><span class="line">      public int trap(int[] height)&#123;</span><br><span class="line">          int res = 0;</span><br><span class="line">          int[] max_left = new int[height.length];</span><br><span class="line">          int[] max_right = new int[height.length];</span><br><span class="line">          //提前求出每一列左边的max_left[i] 和右边的max_right[i]</span><br><span class="line">          //两端不用求，因为两端不能接水</span><br><span class="line">          for(int i = 1; i &lt; height.length - 1; i++)&#123;</span><br><span class="line">              max_left[i] = Math.max(max_left[i - 1], height[i - 1]);</span><br><span class="line">          &#125;</span><br><span class="line">          for(int j = height.length - 2; j &gt;= 0; j--)&#123;</span><br><span class="line">              max_right[j] = Math.max(max_right[j + 1], height[j + 1]);</span><br><span class="line">          &#125;</span><br><span class="line">          </span><br><span class="line">          for(int i = 1; i &lt; height.length - 1; i++)&#123;</span><br><span class="line">              int min = Math.min(max_left[i], max_right[i]);</span><br><span class="line">              if(min &gt; height[i])&#123;</span><br><span class="line">                  res += (min - height[i]);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          return res;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以上代码还可以优化，max_left[i] 是可以优化掉的，最后还可以用单调栈来实现，以博主的水平，掌握到这就好</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
       </categories>
   </entry>
 </search>

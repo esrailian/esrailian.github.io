@@ -22,25 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"esrailian.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="esrailian的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="宇宙松饼">
-<meta property="og:url" content="https://esrailian.github.io/categories/%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="背包问题总结篇">
+<meta property="og:url" content="https://esrailian.github.io/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/index.html">
 <meta property="og:site_name" content="宇宙松饼">
-<meta property="og:description" content="esrailian的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000726.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%981.jpeg">
+<meta property="article:published_time" content="2023-12-21T10:43:38.000Z">
+<meta property="article:modified_time" content="2023-12-21T11:03:37.728Z">
 <meta property="article:author" content="esrailian">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000726.png">
 
 
-<link rel="canonical" href="https://esrailian.github.io/categories/%E5%9B%BE%E8%A7%A3%E7%B3%BB%E7%BB%9F/">
+<link rel="canonical" href="https://esrailian.github.io/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/图解系统/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://esrailian.github.io/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/","path":"2023/12/21/背包问题总结篇/","title":"背包问题总结篇"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类: 图解系统 | 宇宙松饼</title>
+<title>背包问题总结篇 | 宇宙松饼</title>
   
 
 
@@ -186,50 +189,186 @@
 
     </div>
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">图解系统
-          <small>分类</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://esrailian.github.io/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="esrailian">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙松饼">
+      <meta itemprop="description" content="esrailian的博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="背包问题总结篇 | 宇宙松饼">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          背包问题总结篇
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-12-21 18:43:38 / 修改时间：19:03:37" itemprop="dateCreated datePublished" datetime="2023-12-21T18:43:38+08:00">2023-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>658</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000726.png" alt="416.分割等和子集1"></p>
+<span id="more"></span>
+
+<ul>
+<li><p>常见的面试题主要是01背包，完全背包，再加上点多重背包</p>
+</li>
+<li><p>解决背包问题主要靠动规五部曲</p>
+<ul>
+<li>确定dp数组的含义以及下标的含义</li>
+<li>确定递推公式</li>
+<li>初始化dp数组</li>
+<li>确定遍历顺序</li>
+<li>举例推导</li>
+</ul>
+</li>
+<li><p>递推公式主要时以下几种类型</p>
+<ul>
+<li><p>问能否装满背包（最多装多少）</p>
+<p><code>dp[j] = max(dp[j], dp[j - nums[i]] + nums[i])</code></p>
+</li>
+<li><p>问装满背包有几种方法</p>
+<p><code>dp[j] += dp[j - nums[i]]</code></p>
+</li>
+<li><p>问背包装满的最大价值是多少</p>
+<p><code>dp[j] = max(dp[j], dp[j - weight[i]] + value[i])</code></p>
+</li>
+<li><p>问装满背包所需物品的最小个数</p>
+<p><code>dp[j] = min(dp[j], dp[j - coins[i]] + 1)</code></p>
+</li>
+</ul>
+</li>
+<li><p>遍历顺序</p>
+<ul>
+<li>01背包的二维数组先遍历物品还是先遍历背包容量，都是可以的</li>
+<li>01背包的一维数组只能先遍历物品，在遍历背包容量，并且遍历背包容量时只能倒序遍历。这是为了只能加入一次物品，如果正序遍历，就会导致物品被加入多次，不符合01背包</li>
+<li>完全背包的一维数组先遍历物品或者先遍历背包都是可以的，因为物品能加入多次，所以第二层循环时正序遍历</li>
+<li>以上时纯完全背包的遍历顺序<ul>
+<li>当题目求组合数时，我们只能先遍历物品，再遍历背包容量</li>
+<li>当题目求排列数时，我们只能先遍历背包容量，再遍历物品</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>背包问题还有个重要的思想上有些问题第一眼是看出背包思想的，能不能敏锐地感觉出背包问题全靠自己的理解和刷题</p>
+</li>
+<li><p>我的理解是要对某个最大值保持警惕，它很可能就是背包容量，或者是那种分成两半，其中一半就是背包容量（粉碎石头题目）</p>
+</li>
+<li><p>递推公式也很重要，但是不要忘了先确定dp数组的含义以及下标的含义，上来就分析递推公式是不正确的</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%981.jpeg" alt="img"></p>
+</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-06T15:43:13+08:00"
-              content="2023-12-06">
-          12-06
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/" itemprop="url">
-          <span itemprop="name">2.1 CPU是如何执行程序的</span>
-        </a>
-      </div>
+    <footer class="post-footer">
+          
 
-      
-    </header>
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>esrailian
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://esrailian.github.io/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/" title="背包问题总结篇">https://esrailian.github.io/2023/12/21/背包问题总结篇/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/19/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A312-19/" rel="prev" title="滑动窗口12-19">
+                  <i class="fa fa-angle-left"></i> 滑动窗口12-19
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 
 </div>
   </main>

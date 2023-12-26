@@ -22,32 +22,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"esrailian.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="不同的二叉搜索树给定一个整数 n，求以 1 … n 为节点组成的二叉搜索树有多少种？ 示例:">
+    <meta name="description" content="股票问题总结 最多买卖一次  笔者认为本题最好使用贪心来求解  class Solution&#123;     public int maxProfit(int[] prices)&#123;         int min &#x3D; Integer.MAX_VALUE;         int res &#x3D; 0;         for(int i &#x3D; 0; i &lt; prices.length;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态规划12-13">
-<meta property="og:url" content="https://esrailian.github.io/2023/12/13/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-13/index.html">
+<meta property="og:title" content="动态规划股票问题总结">
+<meta property="og:url" content="https://esrailian.github.io/2023/12/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="宇宙松饼">
-<meta property="og:description" content="不同的二叉搜索树给定一个整数 n，求以 1 … n 为节点组成的二叉搜索树有多少种？ 示例:">
+<meta property="og:description" content="股票问题总结 最多买卖一次  笔者认为本题最好使用贪心来求解  class Solution&#123;     public int maxProfit(int[] prices)&#123;         int min &#x3D; Integer.MAX_VALUE;         int res &#x3D; 0;         for(int i &#x3D; 0; i &lt; prices.length;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210113161941835.png">
-<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210107093106367.png">
-<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210107093129889.png">
-<meta property="og:image" content="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg">
-<meta property="article:published_time" content="2023-12-13T01:07:20.000Z">
-<meta property="article:modified_time" content="2023-12-13T02:04:33.030Z">
+<meta property="article:published_time" content="2023-12-26T10:27:24.000Z">
+<meta property="article:modified_time" content="2023-12-26T11:56:12.668Z">
 <meta property="article:author" content="esrailian">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210113161941835.png">
 
 
-<link rel="canonical" href="https://esrailian.github.io/2023/12/13/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-13/">
+<link rel="canonical" href="https://esrailian.github.io/2023/12/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://esrailian.github.io/2023/12/13/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-13/","path":"2023/12/13/动态规划12-13/","title":"动态规划12-13"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://esrailian.github.io/2023/12/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/","path":"2023/12/26/动态规划股票问题总结/","title":"动态规划股票问题总结"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>动态规划12-13 | 宇宙松饼</title>
+<title>动态规划股票问题总结 | 宇宙松饼</title>
   
 
 
@@ -146,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">不同的二叉搜索树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8-%EF%BC%88%E5%8F%8C%E6%8C%87%E9%92%88%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">盛最多水的容器 （双指针）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">股票问题总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -205,7 +200,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://esrailian.github.io/2023/12/13/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-13/">
+    <link itemprop="mainEntityOfPage" href="https://esrailian.github.io/2023/12/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -218,12 +213,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="动态规划12-13 | 宇宙松饼">
+      <meta itemprop="name" content="动态规划股票问题总结 | 宇宙松饼">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          动态规划12-13
+          动态规划股票问题总结
         </h1>
 
         <div class="post-meta-container">
@@ -235,7 +230,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-12-13 09:07:20 / 修改时间：10:04:33" itemprop="dateCreated datePublished" datetime="2023-12-13T09:07:20+08:00">2023-12-13</time>
+      <time title="创建时间：2023-12-26 18:27:24 / 修改时间：19:56:12" itemprop="dateCreated datePublished" datetime="2023-12-26T18:27:24+08:00">2023-12-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,14 +256,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.6k</span>
+      <span>3.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -278,84 +273,138 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="不同的二叉搜索树"><a href="#不同的二叉搜索树" class="headerlink" title="不同的二叉搜索树"></a>不同的二叉搜索树</h1><p>给定一个整数 n，求以 1 … n 为节点组成的二叉搜索树有多少种？</p>
-<p>示例:</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210113161941835.png" alt="img"></p>
-<span id="more"></span>
-
+    <div class="post-body" itemprop="articleBody"><h1 id="股票问题总结"><a href="#股票问题总结" class="headerlink" title="股票问题总结"></a>股票问题总结</h1><ul>
+<li><p>最多买卖一次</p>
 <ul>
-<li><p>这是关于一道用动态规划解决二叉树问题的题目，刚开始看到题目的时候，很难想到动态规划</p>
-</li>
-<li><p>题目要求的是由n个节点，这n个节点可以组成多少种不同的二叉搜索树</p>
-</li>
-<li><p>与常规的动规五部曲不同，我们先找规律，看是否能找到当前状态是否能由上一个状态推出来，若是有，我们就可以开始求递推公式了</p>
-</li>
-<li><p>当n为1时以及n为2时</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210107093106367.png" alt="96.不同的二叉搜索树"></p>
-</li>
-<li><p>当n为3时</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210107093129889.png" alt="96.不同的二叉搜索树1"></p>
-</li>
-<li><p>看看n为3的时候，有哪几种情况。</p>
-<p>当1为头结点的时候，其右子树有两个节点，看这两个节点的布局，是不是和 n 为2的时候两棵树的布局是一样的</p>
-<p>当3为头结点的时候，其左子树有两个节点，看这两个节点的布局，是不是和n为2的时候两棵树的布局也是一样的啊！</p>
-<p>当2为头结点的时候，其左右子树都只有一个节点，布局是不是和n为1的时候只有一棵树的布局也是一样的啊！</p>
-<p>发现到这里，其实我们就找到了重叠子问题了，其实也就是发现可以通过dp[1] 和 dp[2] 来推导出来dp[3]的某种方式。</p>
-<p>dp[3]，就是 元素1为头结点搜索树的数量 + 元素2为头结点搜索树的数量 + 元素3为头结点搜索树的数量</p>
-</li>
-<li><p>第一步，确定dp数组以及下标含义</p>
+<li><p>笔者认为本题最好使用贪心来求解</p>
 <ul>
-<li>dp[i]: 1到i为节点组成的二叉搜索树的个数为dp[i]</li>
+<li><pre><code class="java">class Solution&#123;
+    public int maxProfit(int[] prices)&#123;
+        int min = Integer.MAX_VALUE;
+        int res = 0;
+        for(int i = 0; i &lt; prices.length; i++)&#123;
+            min = Math.min(min, prices[i]);
+            res = Math.max(res, prices[i] - min);
+        &#125;
+        return res;
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 取左边的最小值和右边的最大值相减，得到的差值就是最大利润</span><br><span class="line"></span><br><span class="line">- 最多买卖多次</span><br><span class="line"></span><br><span class="line">  - 继续贪心（因为贪心比较简洁）</span><br><span class="line"></span><br><span class="line">    - ```java</span><br><span class="line">      class Solution&#123;</span><br><span class="line">          public int maxProfit(int[] prices)&#123;</span><br><span class="line">              //注意，后一天减去前一天可能为负值，此时要取0，不要把负数给加上了</span><br><span class="line">              int res = 0;</span><br><span class="line">              for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">                  res += Math.max(prices[i] - prices[i - 1], 0);</span><br><span class="line">      &#125;</span><br><span class="line">              return res;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>因为可以买卖无限次，那么疯狂交易就好了，碰上利润为负的话不要交易就可以了</p>
+</li>
 </ul>
 </li>
-<li><p>第二步，确定递推公式</p>
-<ul>
-<li>dp[i] +&#x3D; dp[j - 1] * dp[i - j]</li>
-<li>j-1 表示 j 为头结点时左子树节点数量； i-j 表示 j 为头结点时右子树结点数量</li>
 </ul>
 </li>
-<li><p>第三步，初始化dp数组</p>
+<li><p>最多买卖两次</p>
 <ul>
-<li>dp[0] &#x3D; 1</li>
+<li><p>无法贪心了，老老实实用动态规划</p>
+</li>
+<li><p>买卖两次比买卖多次要复杂一些</p>
+</li>
+<li><p>我们将一天分为五种状态</p>
+<ul>
+<li>0：没有操作</li>
+<li>1：第一次买入</li>
+<li>2：第一次卖出</li>
+<li>3：第二次买入</li>
+<li>4：第二次卖出</li>
 </ul>
+</li>
+<li><p><code>dp[i][0-4]</code>表示第i天的最大利润是多少</p>
+</li>
+<li><p>初始化</p>
+<ul>
+<li><code>dp[0][0] = 0</code></li>
+<li><code>dp[0][1] = -prices[0]</code></li>
+<li><code>dp[0][2] = 0</code></li>
+<li><code>dp[0][3] = -prices[0]</code></li>
+<li><code>dp[0][4] = 0</code></li>
+</ul>
+</li>
+<li><p>递推公式</p>
+<ul>
+<li><code>dp[i][0]= dp[i - 1][0]</code></li>
+<li><code>dp[i][1] = Math.max(dp[i - 1][1], dp[i- 1][0] - prices[i])</code></li>
+<li><code>dp[i][2] = Math.max(dp[i - 1][2], dp[i - 1][1] + prices[i])</code></li>
+<li><code>dp[i][3] = Math.max(dp[i - 1][3], dp[i - 1][2] - prices[i])</code></li>
+<li><code>dp[i][4] = Math.max(dp[i - 1][4], dp[i - 1][3] + prices[i])</code></li>
+</ul>
+</li>
+<li><p>其实优化一下比较好</p>
+<ul>
+<li>主要优化空间以及状态0其实可以不管</li>
+<li><code>dp[0] </code>表示第一次买入：<code>dp[0] = -prices[i]</code></li>
+<li><code>dp[1]</code>表示第一次卖出：<code>dp[1] = Math.max(dp[1], dp[0] + prices[i])</code></li>
+<li><code>dp[2]</code>表示第二次买入：<code>dp[2] = Math.max(dp[2], dp[1] - prices[i])</code></li>
+<li><code>dp[3]</code>表示第二次卖出：<code>dp[3] = Math.max(dp[3], dp[2] + prices[i])</code></li>
+</ul>
+</li>
+<li><pre><code class="java">Class Solution&#123;
+    public int maxProfit(int[] prices)&#123;
+        int[] dp = new int[4];
+        dp[0] = -prices[0];
+        dp[2] = -prices[0];
+        for(int i = 0; i &lt; prices.length; i++)&#123;
+            dp[0] = -prices[i];
+            dp[1] = Math.max(dp[1], dp[0] + prices[i]);
+            dp[2] = Math.max(dp[2], dp[1] - prices[i]);
+            dp[3] = Math.max(dp[3], dp[2] + prices[i]);
+        &#125;
+        return dp[3];
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最多买卖k次</span><br><span class="line"></span><br><span class="line">  - 根据买卖两次来类比，这种从一个情况推出无限种情况的方式在其他类型题也有见过，一时想不起来了</span><br><span class="line"></span><br><span class="line">  - 从1开始:</span><br><span class="line"></span><br><span class="line">    - 偶数就是卖出</span><br><span class="line">    - 奇数就是买入</span><br><span class="line"></span><br><span class="line">  - 所以相应的递推公式就是</span><br><span class="line"></span><br><span class="line">    - `dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]) `</span><br><span class="line">    - `dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i])`</span><br><span class="line"></span><br><span class="line">  - 初始化时，将偶数都初始化为 `-prices[0]`</span><br><span class="line"></span><br><span class="line">  - 还要注意第二层循环怎么遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    class Solution&#123;</span><br><span class="line">        public int maxProfit(int[] prices)&#123;</span><br><span class="line">            //注意为什么是[2*k + 1],因为最后返回的是2*k</span><br><span class="line">            int[][] dp = new int[prices.length][2*k + 1];</span><br><span class="line">            //初始化</span><br><span class="line">            for(int j = 0; j &lt; 2*k + 1; j += 2)&#123;</span><br><span class="line">    			dp[0][j] = -prices[0];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">                for(int j = 0; j &lt; 2*k - 1; j += 2)&#123;</span><br><span class="line">                    dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]) ;</span><br><span class="line">                    dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return dp[prices.length - 1][2 * k];    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>最多买卖多次，含冷冻期</p>
+<ul>
+<li><p>看卡哥的思路有些没明白状态1和状态2是怎么区分出来的</p>
+</li>
+<li><p>所以看的是另外一位老哥的思路，发现跟简单一些，主要是在对冷冻期的处理上，只需要加上冷冻期前一天的最大利润就好了</p>
 </li>
 <li><p>直接上代码</p>
 </li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numTrees</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">        <span class="comment">//初始化dp数组</span></span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">dp</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= i; j++)&#123;</span><br><span class="line">                dp[i] += dp[j - <span class="number">1</span>] * dp[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><pre><code class="java">class Solution&#123;
+    public int maxProfit(int[] prices)&#123;
+        if(prices == null || prices.length &lt; 2)&#123;
+            return 0;
+        &#125;
+        
+        int[][] dp = new int[prices.length][2];
+        dp[0][0] = -prices[0]; //买入
+        dp[0][1] = 0; //卖出
+        //还要初始化第一天，因为dp[i - 2][1] - prices[i]
+        dp[1][0] = Math.max(dp[0][0], - prices[1]);
+        dp[1][1] = Math.max(dp[0][1], dp[0][0] + prices[1]);
+        
+        for(int i = 2; i &lt; prices.length; i++)&#123;
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 2][1] - prices[i]); //买入，冷冻期前一天dp[i-2]
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
+        &#125;    
+        return dp[prices.length - 1][1];
 
-<hr>
-<h1 id="盛最多水的容器-（双指针）"><a href="#盛最多水的容器-（双指针）" class="headerlink" title="盛最多水的容器 （双指针）"></a>盛最多水的容器 （双指针）</h1><p>给定一个长度为 <code>n</code> 的整数数组 <code>height</code> 。有 <code>n</code> 条垂线，第 <code>i</code> 条线的两个端点是 <code>(i, 0)</code> 和 <code>(i, height[i])</code> 。</p>
-<p>找出其中的两条线，使得它们与 <code>x</code> 轴共同构成的容器可以容纳最多的水。</p>
-<p>返回容器可以储存的最大水量。</p>
-<p><strong>说明：</strong>你不能倾斜容器。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="img"></p>
-<ul>
-<li><p>他们做这题的时候，是怎么想到双指针的？😭</p>
+    &#125;
+&#125;
+</code></pre>
 </li>
-<li><p>思路</p>
-<ul>
-<li><p>将两指针(i,j)分别指向数组的前后两端，那么此时容器的体积就应该为</p>
-<p><code>(j-i)*min(nums[i], nums[j])</code> ,用一个全局变量保存结果，则解决这道题目的核心表达式就为<code>res = max(res, (j-i)*min(nums[i], nums[j]))</code></p>
-</li>
-<li><p>然后我们要怎么移动这两指针呢？是同时移动他们吗？</p>
-<ul>
-<li>并不是，要想找到最大的结果，我们是不是应该移动对应<code>nums</code> 值较小的那个指针，“幻想着下一个值会比现在要大”，即使移动后的值比之前还要小，也没有关系，毕竟我们已经保存了最大的那个结果</li>
-</ul>
+<li><p>代码思路：主要就是两个状态：0表示买入，1表示卖出; 买入的递推公式就需要处理冷冻期的情况，只有两种情况，要么你前一天就是买入的状态，要么你就是当天买入的，注意是在当天买入的前提下，如果取得是<code>dp[i - 2][1] - prices[i]</code>,证明i-1天你才刚卖出，第i天你就是冷冻期，这时候不能买入，这就和我们的前提冲突了，所以只能是i-2天卖出的状态</p>
 </li>
 </ul>
 </li>
-<li><p>思路就这样，直接上代码</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxArea</span><span class="params">(<span class="type">int</span>[] height)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = height.length - <span class="number">1</span>; i &lt; j; )&#123;</span><br><span class="line">            res = Math.max(res, (j - i)Math.min(height[i], height[j]));</span><br><span class="line">            <span class="keyword">if</span>(height[i] &lt; height[j])&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;<span class="keyword">else</span> j--;  <span class="comment">//当它两相等时，移动哪个指针都无所谓</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<li><p>最多买卖多次，含手续费</p>
 <ul>
-<li>总结<ul>
-<li>双指针题目逻辑其实并不难，刚开始做题的时候，自己也尝试着用双指针来解决，但是实在不知道怎么遍历，怎么求结果。看了题解后，跟着代码模拟了一遍才知道思路</li>
-<li>既然智商不够，就只能用熟练度来弥补了</li>
-<li>我亦无他，唯手熟尔</li>
+<li>含手续费可太容易了，三刷的时候一次过</li>
+<li>注意是买卖多次，只要把每次卖出的时候在扣掉手续费就可以了</li>
+<li>给出递推公式：<ul>
+<li><code>dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i])</code> &#x2F;&#x2F;买入</li>
+<li><code>dp[i][1] = Math,max(dp[i - 1][1], dp[i - 1][0] + prices[i] - fee)</code>&#x2F;&#x2F;卖出</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -376,7 +425,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://esrailian.github.io/2023/12/13/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%9212-13/" title="动态规划12-13">https://esrailian.github.io/2023/12/13/动态规划12-13/</a>
+      <a href="https://esrailian.github.io/2023/12/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" title="动态规划股票问题总结">https://esrailian.github.io/2023/12/26/动态规划股票问题总结/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -389,14 +438,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/12/09/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" rel="prev" title="三次握手和四次挥手">
-                  <i class="fa fa-angle-left"></i> 三次握手和四次挥手
+                <a href="/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/" rel="prev" title="背包问题总结篇">
+                  <i class="fa fa-angle-left"></i> 背包问题总结篇
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/12/17/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%BB%E7%BB%93/" rel="next" title="动态规划总结">
-                  动态规划总结 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

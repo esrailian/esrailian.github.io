@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>三次握手和四次挥手</title>
-    <url>/2023/12/09/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>八股文-计算机网络篇</category>
-      </categories>
-  </entry>
-  <entry>
     <title>2.1 CPU是如何执行程序的</title>
     <url>/2023/12/06/2-1-CPU%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84/</url>
     <content><![CDATA[<ul>
@@ -205,67 +197,11 @@
       </categories>
   </entry>
   <entry>
-    <title>二叉树12.3</title>
-    <url>/2023/12/03/%E4%BA%8C%E5%8F%89%E6%A0%9112-3/</url>
-    <content><![CDATA[<h1 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236.二叉树的最近公共祖先"></a>236.二叉树的最近公共祖先</h1><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<span id="more"></span>
-
-<p>例如，给定如下二叉树: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4]</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201016173414722.png" alt="236. 二叉树的最近公共祖先"></p>
-<ul>
-<li>找最近的公共祖先，首先想到能自底向上查就好了，那二叉树该怎么自底向上查询呢？<ul>
-<li>当然是后序遍历了，后序遍历就是一个天然的回溯过程</li>
-</ul>
-</li>
-<li>这道题目要遍历整棵树，因为 p 和 q 的位置是随机的，可能分别分布在根节点的两棵左右子树上</li>
-<li>直接上代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span> || root == p || root == q) &#123; <span class="comment">// 递归结束条件</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 后序遍历</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> lowestCommonAncestor(root.left, p, q);</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> lowestCommonAncestor(root.right, p, q);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若未找到节点 p 或 q</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left != <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123; <span class="comment">// 若找到两个节点</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>通过画图来模拟程序的运行过程可以加深对此代码的理解</li>
-</ul>
-<hr>
-<h1 id="235-二叉搜索树的最近公共祖先"><a href="#235-二叉搜索树的最近公共祖先" class="headerlink" title="235.二叉搜索树的最近公共祖先"></a>235.二叉搜索树的最近公共祖先</h1><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<p>例如，给定如下二叉搜索树: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5]</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201018172243602.png" alt="235. 二叉搜索树的最近公共祖先"></p>
-<ul>
-<li>找的是在二叉搜索树中的最近公共祖先，要时刻记住，二叉搜索树的中序遍历是有序的，要充分利用这个特性</li>
-<li>要找p 和 q 的公共祖先，我们可以从上到下迭代遍历，<strong>当第一次遇到节点的值是在[p,q]之间后，这个节点一定就是最近的公共祖先了</strong>。这也正是最巧妙的地方</li>
-<li>可以模拟来论证，当 p &#x3D; 0， q &#x3D; 5时，从根节点开始遍历，遍历到结点2时，可以发现2在p和q之间，此时如果继续往下，向左遍历，那么结点2会错过成为5的祖先。</li>
-<li>直接上代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (root.val &gt; p.val &amp;&amp; root.val &gt; q.val) &#123;</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &lt; p.val &amp;&amp; root.val &lt; q.val) &#123;</span><br><span class="line">                root = root.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>迭代法的代码看上去可读性高些，递归法看上去更简便些</li>
-</ul>
-<hr>
-<h1 id="每日一题-1423-可获得的最大点数"><a href="#每日一题-1423-可获得的最大点数" class="headerlink" title="每日一题 1423.可获得的最大点数"></a>每日一题 1423.可获得的最大点数</h1><ul>
-<li><p>几张卡牌 <strong>排成一行</strong>，每张卡牌都有一个对应的点数。点数由整数数组 <code>cardPoints</code> 给出。每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 <code>k</code> 张卡牌。你的点数就是你拿到手中的所有卡牌的点数之和。给你一个整数数组 <code>cardPoints</code> 和整数 <code>k</code>，请你返回可以获得的最大点数。</p>
-</li>
-<li><p>解题思路</p>
-<ul>
-<li>每次都只能从两头取牌，看到题目首先想到每次取两头中最大的牌，最后的结果不就是最大的结果了吗？这种想法显然太稚嫩了</li>
-<li>因为你不知道左右两边中间的牌是否更大，简单来说就是这样（5，1，1000，2），你只能取两张牌（k&#x3D;2），如果每次都取两边最大的，那么最后的大牌1000，就取不到了。</li>
-<li>翻看题解，主要有两种思路，一种是前缀和，一种是滑动窗口。后者的思路比较能让笔者接收，属于是鄙人的舒适区了。</li>
-<li>先来看滑动窗口。题目不是要求最后的最大值吗，我直接整一个滑动窗口从头开始遍历，滑动窗口的长度为牌数减去最后取得的牌数（len &#x3D; length - k），遍历完成后得到最小的滑动窗口值（min），那么用整幅牌的总和sum减去这个min值，就可以求得最终手里牌的最大值。很巧妙，逆向思维加个滑动窗口。</li>
-<li>直接上代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> cardPoints.length, len = n - k;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>, cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            sum += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            cur += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> cur;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> len; i &lt; n; i++)&#123;</span><br><span class="line">            cur = cur + cardPoints[i] - cardPoints[i - len];</span><br><span class="line">            min = Math.min(min, cur);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum - min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>另一种解法：前缀和</p>
-</li>
-<li><p>前缀和的概念有些遗忘了，直接上代码</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> cardPoints.length;</span><br><span class="line">        <span class="type">int</span> []pre = <span class="keyword">new</span> <span class="title class_">int</span>[len+<span class="number">1</span>]; pre[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; len;i++)&#123;</span><br><span class="line">            pre[i+<span class="number">1</span>] = cardPoints[i] + pre[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt;= k;i++)&#123;</span><br><span class="line">            max = Math.max(max, pre[i] + pre[len] - pre[len-k+i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：imcover</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/solutions/220256/qian-zhui-he-xie-fa-by-imcover/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
-
-]]></content>
+    <title>三次握手和四次挥手</title>
+    <url>/2023/12/09/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>算法</category>
+        <category>八股文-计算机网络篇</category>
       </categories>
   </entry>
   <entry>
@@ -352,6 +288,70 @@
 </ul>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>二叉树12.3</title>
+    <url>/2023/12/03/%E4%BA%8C%E5%8F%89%E6%A0%9112-3/</url>
+    <content><![CDATA[<h1 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236.二叉树的最近公共祖先"></a>236.二叉树的最近公共祖先</h1><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<span id="more"></span>
+
+<p>例如，给定如下二叉树: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4]</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201016173414722.png" alt="236. 二叉树的最近公共祖先"></p>
+<ul>
+<li>找最近的公共祖先，首先想到能自底向上查就好了，那二叉树该怎么自底向上查询呢？<ul>
+<li>当然是后序遍历了，后序遍历就是一个天然的回溯过程</li>
+</ul>
+</li>
+<li>这道题目要遍历整棵树，因为 p 和 q 的位置是随机的，可能分别分布在根节点的两棵左右子树上</li>
+<li>直接上代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span> || root == p || root == q) &#123; <span class="comment">// 递归结束条件</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 后序遍历</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> lowestCommonAncestor(root.left, p, q);</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> lowestCommonAncestor(root.right, p, q);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若未找到节点 p 或 q</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left == <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left != <span class="literal">null</span> &amp;&amp; right == <span class="literal">null</span>) &#123; <span class="comment">// 若找到一个节点</span></span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123; <span class="comment">// 若找到两个节点</span></span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过画图来模拟程序的运行过程可以加深对此代码的理解</li>
+</ul>
+<hr>
+<h1 id="235-二叉搜索树的最近公共祖先"><a href="#235-二叉搜索树的最近公共祖先" class="headerlink" title="235.二叉搜索树的最近公共祖先"></a>235.二叉搜索树的最近公共祖先</h1><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>例如，给定如下二叉搜索树: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5]</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201018172243602.png" alt="235. 二叉搜索树的最近公共祖先"></p>
+<ul>
+<li>找的是在二叉搜索树中的最近公共祖先，要时刻记住，二叉搜索树的中序遍历是有序的，要充分利用这个特性</li>
+<li>要找p 和 q 的公共祖先，我们可以从上到下迭代遍历，<strong>当第一次遇到节点的值是在[p,q]之间后，这个节点一定就是最近的公共祖先了</strong>。这也正是最巧妙的地方</li>
+<li>可以模拟来论证，当 p &#x3D; 0， q &#x3D; 5时，从根节点开始遍历，遍历到结点2时，可以发现2在p和q之间，此时如果继续往下，向左遍历，那么结点2会错过成为5的祖先。</li>
+<li>直接上代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (root.val &gt; p.val &amp;&amp; root.val &gt; q.val) &#123;</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &lt; p.val &amp;&amp; root.val &lt; q.val) &#123;</span><br><span class="line">                root = root.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>迭代法的代码看上去可读性高些，递归法看上去更简便些</li>
+</ul>
+<hr>
+<h1 id="每日一题-1423-可获得的最大点数"><a href="#每日一题-1423-可获得的最大点数" class="headerlink" title="每日一题 1423.可获得的最大点数"></a>每日一题 1423.可获得的最大点数</h1><ul>
+<li><p>几张卡牌 <strong>排成一行</strong>，每张卡牌都有一个对应的点数。点数由整数数组 <code>cardPoints</code> 给出。每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 <code>k</code> 张卡牌。你的点数就是你拿到手中的所有卡牌的点数之和。给你一个整数数组 <code>cardPoints</code> 和整数 <code>k</code>，请你返回可以获得的最大点数。</p>
+</li>
+<li><p>解题思路</p>
+<ul>
+<li>每次都只能从两头取牌，看到题目首先想到每次取两头中最大的牌，最后的结果不就是最大的结果了吗？这种想法显然太稚嫩了</li>
+<li>因为你不知道左右两边中间的牌是否更大，简单来说就是这样（5，1，1000，2），你只能取两张牌（k&#x3D;2），如果每次都取两边最大的，那么最后的大牌1000，就取不到了。</li>
+<li>翻看题解，主要有两种思路，一种是前缀和，一种是滑动窗口。后者的思路比较能让笔者接收，属于是鄙人的舒适区了。</li>
+<li>先来看滑动窗口。题目不是要求最后的最大值吗，我直接整一个滑动窗口从头开始遍历，滑动窗口的长度为牌数减去最后取得的牌数（len &#x3D; length - k），遍历完成后得到最小的滑动窗口值（min），那么用整幅牌的总和sum减去这个min值，就可以求得最终手里牌的最大值。很巧妙，逆向思维加个滑动窗口。</li>
+<li>直接上代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> cardPoints.length, len = n - k;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>, cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            sum += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            cur += cardPoints[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> cur;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> len; i &lt; n; i++)&#123;</span><br><span class="line">            cur = cur + cardPoints[i] - cardPoints[i - len];</span><br><span class="line">            min = Math.min(min, cur);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum - min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另一种解法：前缀和</p>
+</li>
+<li><p>前缀和的概念有些遗忘了，直接上代码</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxScore</span><span class="params">(<span class="type">int</span>[] cardPoints, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> cardPoints.length;</span><br><span class="line">        <span class="type">int</span> []pre = <span class="keyword">new</span> <span class="title class_">int</span>[len+<span class="number">1</span>]; pre[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; len;i++)&#123;</span><br><span class="line">            pre[i+<span class="number">1</span>] = cardPoints[i] + pre[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt;= k;i++)&#123;</span><br><span class="line">            max = Math.max(max, pre[i] + pre[len] - pre[len-k+i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：imcover</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/solutions/220256/qian-zhui-he-xie-fa-by-imcover/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>算法</category>
@@ -562,6 +562,65 @@
       </categories>
   </entry>
   <entry>
+    <title>背包问题总结篇</title>
+    <url>/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/</url>
+    <content><![CDATA[<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000726.png" alt="416.分割等和子集1"></p>
+<span id="more"></span>
+
+<ul>
+<li><p>常见的面试题主要是01背包，完全背包，再加上点多重背包</p>
+</li>
+<li><p>解决背包问题主要靠动规五部曲</p>
+<ul>
+<li>确定dp数组的含义以及下标的含义</li>
+<li>确定递推公式</li>
+<li>初始化dp数组</li>
+<li>确定遍历顺序</li>
+<li>举例推导</li>
+</ul>
+</li>
+<li><p>递推公式主要时以下几种类型</p>
+<ul>
+<li><p>问能否装满背包（最多装多少）</p>
+<p><code>dp[j] = max(dp[j], dp[j - nums[i]] + nums[i])</code></p>
+</li>
+<li><p>问装满背包有几种方法</p>
+<p><code>dp[j] += dp[j - nums[i]]</code></p>
+</li>
+<li><p>问背包装满的最大价值是多少</p>
+<p><code>dp[j] = max(dp[j], dp[j - weight[i]] + value[i])</code></p>
+</li>
+<li><p>问装满背包所需物品的最小个数</p>
+<p><code>dp[j] = min(dp[j], dp[j - coins[i]] + 1)</code></p>
+</li>
+</ul>
+</li>
+<li><p>遍历顺序</p>
+<ul>
+<li>01背包的二维数组先遍历物品还是先遍历背包容量，都是可以的</li>
+<li>01背包的一维数组只能先遍历物品，在遍历背包容量，并且遍历背包容量时只能倒序遍历。这是为了只能加入一次物品，如果正序遍历，就会导致物品被加入多次，不符合01背包</li>
+<li>完全背包的一维数组先遍历物品或者先遍历背包都是可以的，因为物品能加入多次，所以第二层循环时正序遍历</li>
+<li>以上时纯完全背包的遍历顺序<ul>
+<li>当题目求组合数时，我们只能先遍历物品，再遍历背包容量</li>
+<li>当题目求排列数时，我们只能先遍历背包容量，再遍历物品</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>背包问题还有个重要的思想上有些问题第一眼是看出背包思想的，能不能敏锐地感觉出背包问题全靠自己的理解和刷题</p>
+</li>
+<li><p>我的理解是要对某个最大值保持警惕，它很可能就是背包容量，或者是那种分成两半，其中一半就是背包容量（粉碎石头题目）</p>
+</li>
+<li><p>递推公式也很重要，但是不要忘了先确定dp数组的含义以及下标的含义，上来就分析递推公式是不正确的</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%981.jpeg" alt="img"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>滑动窗口12-19</title>
     <url>/2023/12/19/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A312-19/</url>
     <content><![CDATA[<h1 id="无重复字符的最长子串"><a href="#无重复字符的最长子串" class="headerlink" title="无重复字符的最长子串"></a>无重复字符的最长子串</h1><ul>
@@ -624,57 +683,141 @@
       </categories>
   </entry>
   <entry>
-    <title>背包问题总结篇</title>
-    <url>/2023/12/21/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%E7%AF%87/</url>
-    <content><![CDATA[<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230310000726.png" alt="416.分割等和子集1"></p>
-<span id="more"></span>
+    <title>动态规划股票问题总结</title>
+    <url>/2023/12/26/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="股票问题总结"><a href="#股票问题总结" class="headerlink" title="股票问题总结"></a>股票问题总结</h1><ul>
+<li><p>最多买卖一次</p>
+<ul>
+<li><p>笔者认为本题最好使用贪心来求解</p>
+<ul>
+<li><pre><code class="java">class Solution&#123;
+    public int maxProfit(int[] prices)&#123;
+        int min = Integer.MAX_VALUE;
+        int res = 0;
+        for(int i = 0; i &lt; prices.length; i++)&#123;
+            min = Math.min(min, prices[i]);
+            res = Math.max(res, prices[i] - min);
+        &#125;
+        return res;
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    - 取左边的最小值和右边的最大值相减，得到的差值就是最大利润</span><br><span class="line"></span><br><span class="line">- 最多买卖多次</span><br><span class="line"></span><br><span class="line">  - 继续贪心（因为贪心比较简洁）</span><br><span class="line"></span><br><span class="line">    - ```java</span><br><span class="line">      class Solution&#123;</span><br><span class="line">          public int maxProfit(int[] prices)&#123;</span><br><span class="line">              //注意，后一天减去前一天可能为负值，此时要取0，不要把负数给加上了</span><br><span class="line">              int res = 0;</span><br><span class="line">              for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">                  res += Math.max(prices[i] - prices[i - 1], 0);</span><br><span class="line">      &#125;</span><br><span class="line">              return res;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>因为可以买卖无限次，那么疯狂交易就好了，碰上利润为负的话不要交易就可以了</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>最多买卖两次</p>
+<ul>
+<li><p>无法贪心了，老老实实用动态规划</p>
+</li>
+<li><p>买卖两次比买卖多次要复杂一些</p>
+</li>
+<li><p>我们将一天分为五种状态</p>
+<ul>
+<li>0：没有操作</li>
+<li>1：第一次买入</li>
+<li>2：第一次卖出</li>
+<li>3：第二次买入</li>
+<li>4：第二次卖出</li>
+</ul>
+</li>
+<li><p><code>dp[i][0-4]</code>表示第i天的最大利润是多少</p>
+</li>
+<li><p>初始化</p>
+<ul>
+<li><code>dp[0][0] = 0</code></li>
+<li><code>dp[0][1] = -prices[0]</code></li>
+<li><code>dp[0][2] = 0</code></li>
+<li><code>dp[0][3] = -prices[0]</code></li>
+<li><code>dp[0][4] = 0</code></li>
+</ul>
+</li>
+<li><p>递推公式</p>
+<ul>
+<li><code>dp[i][0]= dp[i - 1][0]</code></li>
+<li><code>dp[i][1] = Math.max(dp[i - 1][1], dp[i- 1][0] - prices[i])</code></li>
+<li><code>dp[i][2] = Math.max(dp[i - 1][2], dp[i - 1][1] + prices[i])</code></li>
+<li><code>dp[i][3] = Math.max(dp[i - 1][3], dp[i - 1][2] - prices[i])</code></li>
+<li><code>dp[i][4] = Math.max(dp[i - 1][4], dp[i - 1][3] + prices[i])</code></li>
+</ul>
+</li>
+<li><p>其实优化一下比较好</p>
+<ul>
+<li>主要优化空间以及状态0其实可以不管</li>
+<li><code>dp[0] </code>表示第一次买入：<code>dp[0] = -prices[i]</code></li>
+<li><code>dp[1]</code>表示第一次卖出：<code>dp[1] = Math.max(dp[1], dp[0] + prices[i])</code></li>
+<li><code>dp[2]</code>表示第二次买入：<code>dp[2] = Math.max(dp[2], dp[1] - prices[i])</code></li>
+<li><code>dp[3]</code>表示第二次卖出：<code>dp[3] = Math.max(dp[3], dp[2] + prices[i])</code></li>
+</ul>
+</li>
+<li><pre><code class="java">Class Solution&#123;
+    public int maxProfit(int[] prices)&#123;
+        int[] dp = new int[4];
+        dp[0] = -prices[0];
+        dp[2] = -prices[0];
+        for(int i = 0; i &lt; prices.length; i++)&#123;
+            dp[0] = -prices[i];
+            dp[1] = Math.max(dp[1], dp[0] + prices[i]);
+            dp[2] = Math.max(dp[2], dp[1] - prices[i]);
+            dp[3] = Math.max(dp[3], dp[2] + prices[i]);
+        &#125;
+        return dp[3];
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 最多买卖k次</span><br><span class="line"></span><br><span class="line">  - 根据买卖两次来类比，这种从一个情况推出无限种情况的方式在其他类型题也有见过，一时想不起来了</span><br><span class="line"></span><br><span class="line">  - 从1开始:</span><br><span class="line"></span><br><span class="line">    - 偶数就是卖出</span><br><span class="line">    - 奇数就是买入</span><br><span class="line"></span><br><span class="line">  - 所以相应的递推公式就是</span><br><span class="line"></span><br><span class="line">    - `dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]) `</span><br><span class="line">    - `dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i])`</span><br><span class="line"></span><br><span class="line">  - 初始化时，将偶数都初始化为 `-prices[0]`</span><br><span class="line"></span><br><span class="line">  - 还要注意第二层循环怎么遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    class Solution&#123;</span><br><span class="line">        public int maxProfit(int[] prices)&#123;</span><br><span class="line">            //注意为什么是[2*k + 1],因为最后返回的是2*k</span><br><span class="line">            int[][] dp = new int[prices.length][2*k + 1];</span><br><span class="line">            //初始化</span><br><span class="line">            for(int j = 0; j &lt; 2*k + 1; j += 2)&#123;</span><br><span class="line">    			dp[0][j] = -prices[0];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">                for(int j = 0; j &lt; 2*k - 1; j += 2)&#123;</span><br><span class="line">                    dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]) ;</span><br><span class="line">                    dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return dp[prices.length - 1][2 * k];    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>最多买卖多次，含冷冻期</p>
+<ul>
+<li><p>看卡哥的思路有些没明白状态1和状态2是怎么区分出来的</p>
+</li>
+<li><p>所以看的是另外一位老哥的思路，发现跟简单一些，主要是在对冷冻期的处理上，只需要加上冷冻期前一天的最大利润就好了</p>
+</li>
+<li><p>直接上代码</p>
+</li>
+<li><pre><code class="java">class Solution&#123;
+    public int maxProfit(int[] prices)&#123;
+        if(prices == null || prices.length &lt; 2)&#123;
+            return 0;
+        &#125;
+        
+        int[][] dp = new int[prices.length][2];
+        dp[0][0] = -prices[0]; //买入
+        dp[0][1] = 0; //卖出
+        //还要初始化第一天，因为dp[i - 2][1] - prices[i]
+        dp[1][0] = Math.max(dp[0][0], - prices[1]);
+        dp[1][1] = Math.max(dp[0][1], dp[0][0] + prices[1]);
+        
+        for(int i = 2; i &lt; prices.length; i++)&#123;
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 2][1] - prices[i]); //买入，冷冻期前一天dp[i-2]
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
+        &#125;    
+        return dp[prices.length - 1][1];
 
-<ul>
-<li><p>常见的面试题主要是01背包，完全背包，再加上点多重背包</p>
+    &#125;
+&#125;
+</code></pre>
 </li>
-<li><p>解决背包问题主要靠动规五部曲</p>
-<ul>
-<li>确定dp数组的含义以及下标的含义</li>
-<li>确定递推公式</li>
-<li>初始化dp数组</li>
-<li>确定遍历顺序</li>
-<li>举例推导</li>
-</ul>
-</li>
-<li><p>递推公式主要时以下几种类型</p>
-<ul>
-<li><p>问能否装满背包（最多装多少）</p>
-<p><code>dp[j] = max(dp[j], dp[j - nums[i]] + nums[i])</code></p>
-</li>
-<li><p>问装满背包有几种方法</p>
-<p><code>dp[j] += dp[j - nums[i]]</code></p>
-</li>
-<li><p>问背包装满的最大价值是多少</p>
-<p><code>dp[j] = max(dp[j], dp[j - weight[i]] + value[i])</code></p>
-</li>
-<li><p>问装满背包所需物品的最小个数</p>
-<p><code>dp[j] = min(dp[j], dp[j - coins[i]] + 1)</code></p>
+<li><p>代码思路：主要就是两个状态：0表示买入，1表示卖出; 买入的递推公式就需要处理冷冻期的情况，只有两种情况，要么你前一天就是买入的状态，要么你就是当天买入的，注意是在当天买入的前提下，如果取得是<code>dp[i - 2][1] - prices[i]</code>,证明i-1天你才刚卖出，第i天你就是冷冻期，这时候不能买入，这就和我们的前提冲突了，所以只能是i-2天卖出的状态</p>
 </li>
 </ul>
 </li>
-<li><p>遍历顺序</p>
+<li><p>最多买卖多次，含手续费</p>
 <ul>
-<li>01背包的二维数组先遍历物品还是先遍历背包容量，都是可以的</li>
-<li>01背包的一维数组只能先遍历物品，在遍历背包容量，并且遍历背包容量时只能倒序遍历。这是为了只能加入一次物品，如果正序遍历，就会导致物品被加入多次，不符合01背包</li>
-<li>完全背包的一维数组先遍历物品或者先遍历背包都是可以的，因为物品能加入多次，所以第二层循环时正序遍历</li>
-<li>以上时纯完全背包的遍历顺序<ul>
-<li>当题目求组合数时，我们只能先遍历物品，再遍历背包容量</li>
-<li>当题目求排列数时，我们只能先遍历背包容量，再遍历物品</li>
+<li>含手续费可太容易了，三刷的时候一次过</li>
+<li>注意是买卖多次，只要把每次卖出的时候在扣掉手续费就可以了</li>
+<li>给出递推公式：<ul>
+<li><code>dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i])</code> &#x2F;&#x2F;买入</li>
+<li><code>dp[i][1] = Math,max(dp[i - 1][1], dp[i - 1][0] + prices[i] - fee)</code>&#x2F;&#x2F;卖出</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>背包问题还有个重要的思想上有些问题第一眼是看出背包思想的，能不能敏锐地感觉出背包问题全靠自己的理解和刷题</p>
-</li>
-<li><p>我的理解是要对某个最大值保持警惕，它很可能就是背包容量，或者是那种分成两半，其中一半就是背包容量（粉碎石头题目）</p>
-</li>
-<li><p>递推公式也很重要，但是不要忘了先确定dp数组的含义以及下标的含义，上来就分析递推公式是不正确的</p>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%981.jpeg" alt="img"></p>
 </li>
 </ul>
 ]]></content>

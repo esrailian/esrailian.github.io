@@ -30,7 +30,7 @@
 <meta property="og:description" content="股票问题总结 最多买卖一次  笔者认为本题最好使用贪心来求解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-26T10:27:24.000Z">
-<meta property="article:modified_time" content="2023-12-26T12:03:10.237Z">
+<meta property="article:modified_time" content="2023-12-26T12:10:19.725Z">
 <meta property="article:author" content="esrailian">
 <meta name="twitter:card" content="summary">
 
@@ -230,7 +230,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-12-26 18:27:24 / 修改时间：20:03:10" itemprop="dateCreated datePublished" datetime="2023-12-26T18:27:24+08:00">2023-12-26</time>
+      <time title="创建时间：2023-12-26 18:27:24 / 修改时间：20:10:19" itemprop="dateCreated datePublished" datetime="2023-12-26T18:27:24+08:00">2023-12-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,23 +279,21 @@
 <li><p>笔者认为本题最好使用贪心来求解</p>
 <span id="more"></span>
 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">            min = Math.min(min, prices[i]);</span><br><span class="line">            res = Math.max(res, prices[i] - min);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>取左边的最小值和右边的最大值相减，得到的差值就是最大利润</p>
+</li>
+</ul>
+</li>
+<li><p>最多买卖多次</p>
 <ul>
-<li><pre><code class="java">class Solution&#123;
-    public int maxProfit(int[] prices)&#123;
-        int min = Integer.MAX_VALUE;
-        int res = 0;
-        for(int i = 0; i &lt; prices.length; i++)&#123;
-            min = Math.min(min, prices[i]);
-            res = Math.max(res, prices[i] - min);
-        &#125;
-        return res;
-    &#125;
-&#125;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 取左边的最小值和右边的最大值相减，得到的差值就是最大利润</span><br><span class="line"></span><br><span class="line">- 最多买卖多次</span><br><span class="line"></span><br><span class="line">  - 继续贪心（因为贪心比较简洁）</span><br><span class="line"></span><br><span class="line">    - ```java</span><br><span class="line">      class Solution&#123;</span><br><span class="line">          public int maxProfit(int[] prices)&#123;</span><br><span class="line">              //注意，后一天减去前一天可能为负值，此时要取0，不要把负数给加上了</span><br><span class="line">              int res = 0;</span><br><span class="line">              for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">                  res += Math.max(prices[i] - prices[i - 1], 0);</span><br><span class="line">      &#125;</span><br><span class="line">              return res;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>因为可以买卖无限次，那么疯狂交易就好了，碰上利润为负的话不要交易就可以了</p>
-</li>
+<li><p>继续贪心（因为贪心比较简洁）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span>&#123;</span><br><span class="line">        <span class="comment">//注意，后一天减去前一天可能为负值，此时要取0，不要把负数给加上了</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">            res += Math.max(prices[i] - prices[i - <span class="number">1</span>], <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>因为可以买卖无限次，那么疯狂交易就好了，碰上利润为负的话不要交易就可以了</li>
 </ul>
 </li>
 </ul>
@@ -343,24 +341,29 @@
 <li><code>dp[2]</code>表示第二次买入：<code>dp[2] = Math.max(dp[2], dp[1] - prices[i])</code></li>
 <li><code>dp[3]</code>表示第二次卖出：<code>dp[3] = Math.max(dp[3], dp[2] + prices[i])</code></li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class Solution&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">4</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">2</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">            dp[<span class="number">0</span>] = -prices[i];</span><br><span class="line">            dp[<span class="number">1</span>] = Math.max(dp[<span class="number">1</span>], dp[<span class="number">0</span>] + prices[i]);</span><br><span class="line">            dp[<span class="number">2</span>] = Math.max(dp[<span class="number">2</span>], dp[<span class="number">1</span>] - prices[i]);</span><br><span class="line">            dp[<span class="number">3</span>] = Math.max(dp[<span class="number">3</span>], dp[<span class="number">2</span>] + prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
-<li><pre><code class="java">Class Solution&#123;
-    public int maxProfit(int[] prices)&#123;
-        int[] dp = new int[4];
-        dp[0] = -prices[0];
-        dp[2] = -prices[0];
-        for(int i = 0; i &lt; prices.length; i++)&#123;
-            dp[0] = -prices[i];
-            dp[1] = Math.max(dp[1], dp[0] + prices[i]);
-            dp[2] = Math.max(dp[2], dp[1] - prices[i]);
-            dp[3] = Math.max(dp[3], dp[2] + prices[i]);
-        &#125;
-        return dp[3];
-    &#125;
-&#125;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最多买卖k次</span><br><span class="line"></span><br><span class="line">  - 根据买卖两次来类比，这种从一个情况推出无限种情况的方式在其他类型题也有见过，一时想不起来了</span><br><span class="line"></span><br><span class="line">  - 从1开始:</span><br><span class="line"></span><br><span class="line">    - 偶数就是卖出</span><br><span class="line">    - 奇数就是买入</span><br><span class="line"></span><br><span class="line">  - 所以相应的递推公式就是</span><br><span class="line"></span><br><span class="line">    - `dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]) `</span><br><span class="line">    - `dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i])`</span><br><span class="line"></span><br><span class="line">  - 初始化时，将偶数都初始化为 `-prices[0]`</span><br><span class="line"></span><br><span class="line">  - 还要注意第二层循环怎么遍历</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    class Solution&#123;</span><br><span class="line">        public int maxProfit(int[] prices)&#123;</span><br><span class="line">            //注意为什么是[2*k + 1],因为最后返回的是2*k</span><br><span class="line">            int[][] dp = new int[prices.length][2*k + 1];</span><br><span class="line">            //初始化</span><br><span class="line">            for(int j = 0; j &lt; 2*k + 1; j += 2)&#123;</span><br><span class="line">    			dp[0][j] = -prices[0];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">                for(int j = 0; j &lt; 2*k - 1; j += 2)&#123;</span><br><span class="line">                    dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]) ;</span><br><span class="line">                    dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return dp[prices.length - 1][2 * k];    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
+<li><p>最多买卖k次</p>
+<ul>
+<li><p>根据买卖两次来类比，这种从一个情况推出无限种情况的方式在其他类型题也有见过，一时想不起来了</p>
 </li>
+<li><p>从1开始:</p>
+<ul>
+<li>偶数就是卖出</li>
+<li>奇数就是买入</li>
+</ul>
+</li>
+<li><p>所以相应的递推公式就是</p>
+<ul>
+<li><code>dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]) </code></li>
+<li><code>dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i])</code></li>
+</ul>
+</li>
+<li><p>初始化时，将偶数都初始化为 <code>-prices[0]</code></p>
+</li>
+<li><p>还要注意第二层循环怎么遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span>&#123;</span><br><span class="line">        <span class="comment">//注意为什么是[2*k + 1],因为最后返回的是2*k</span></span><br><span class="line">        <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[prices.length][<span class="number">2</span>*k + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">2</span>*k + <span class="number">1</span>; j += <span class="number">2</span>)&#123;</span><br><span class="line">			dp[<span class="number">0</span>][j] = -prices[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">2</span>*k - <span class="number">1</span>; j += <span class="number">2</span>)&#123;</span><br><span class="line">                dp[i][j + <span class="number">1</span>] = Math.max(dp[i - <span class="number">1</span>][j + <span class="number">1</span>], dp[i - <span class="number">1</span>][j] - prices[i]) ;</span><br><span class="line">                dp[i][j + <span class="number">2</span>] = Math.max(dp[i - <span class="number">1</span>][j + <span class="number">2</span>], dp[i - <span class="number">1</span>][j + <span class="number">1</span>] + prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[prices.length - <span class="number">1</span>][<span class="number">2</span> * k];    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>最多买卖多次，含冷冻期</p>
@@ -370,29 +373,7 @@
 <li><p>所以看的是另外一位老哥的思路，发现跟简单一些，主要是在对冷冻期的处理上，只需要加上冷冻期前一天的最大利润就好了</p>
 </li>
 <li><p>直接上代码</p>
-</li>
-<li><pre><code class="java">class Solution&#123;
-    public int maxProfit(int[] prices)&#123;
-        if(prices == null || prices.length &lt; 2)&#123;
-            return 0;
-        &#125;
-        
-        int[][] dp = new int[prices.length][2];
-        dp[0][0] = -prices[0]; //买入
-        dp[0][1] = 0; //卖出
-        //还要初始化第一天，因为dp[i - 2][1] - prices[i]
-        dp[1][0] = Math.max(dp[0][0], - prices[1]);
-        dp[1][1] = Math.max(dp[0][1], dp[0][0] + prices[1]);
-        
-        for(int i = 2; i &lt; prices.length; i++)&#123;
-            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 2][1] - prices[i]); //买入，冷冻期前一天dp[i-2]
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
-        &#125;    
-        return dp[prices.length - 1][1];
-
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices == <span class="literal">null</span> || prices.length &lt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[prices.length][<span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = -prices[<span class="number">0</span>]; <span class="comment">//买入</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">0</span>; <span class="comment">//卖出</span></span><br><span class="line">        <span class="comment">//还要初始化第一天，因为dp[i - 2][1] - prices[i]</span></span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">0</span>] = Math.max(dp[<span class="number">0</span>][<span class="number">0</span>], - prices[<span class="number">1</span>]);</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">1</span>] = Math.max(dp[<span class="number">0</span>][<span class="number">1</span>], dp[<span class="number">0</span>][<span class="number">0</span>] + prices[<span class="number">1</span>]);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">2</span>][<span class="number">1</span>] - prices[i]); <span class="comment">//买入，冷冻期前一天dp[i-2]</span></span><br><span class="line">            dp[i][<span class="number">1</span>] = Math.max(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">0</span>] + prices[i]);</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">return</span> dp[prices.length - <span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>代码思路：主要就是两个状态：0表示买入，1表示卖出; 买入的递推公式就需要处理冷冻期的情况，只有两种情况，要么你前一天就是买入的状态，要么你就是当天买入的，注意是在当天买入的前提下，如果取得是<code>dp[i - 2][1] - prices[i]</code>,证明i-1天你才刚卖出，第i天你就是冷冻期，这时候不能买入，这就和我们的前提冲突了，所以只能是i-2天卖出的状态</p>
 </li>
